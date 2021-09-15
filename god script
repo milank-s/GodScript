@@ -1,0 +1,36 @@
+god script
+
+
+
+JOBS
+
+letterer to write text
+illustrators for illuminated manuscripts
+shepherd to raise sheep for vellum
+bookbinder to create books
+
+
+	
+breakpoints at 5, 10, 20, 50 etc monks for new facilities
+
+
+UI
+
+Counters
+
+	counter for words written. 
+	counter for books written
+
+Buttons
+	write word
+	hire monk
+	bind book
+	create vellum sheet
+
+
+Windows
+
+1. generated text
+2. monastery view
+3. worker allocation
+4. monastery updates
