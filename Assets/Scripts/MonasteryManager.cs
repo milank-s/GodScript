@@ -151,7 +151,7 @@ public class MonasteryManager : MonoBehaviour
 
         UIManager.i.unboundPages.SetText(pagesDone.ToString());
         UIManager.i.emptyPages.SetText(pages.ToString());
-        UIManager.i.words.SetText(words.ToString());
+        UIManager.i.words.SetText(Mathf.Floor(words).ToString());
 
         //fire events if words, pages, or books were completed;
         if(wordsCompleted != 0){

@@ -8,7 +8,10 @@ public class ScriptManager : MonoBehaviour
     public TextAsset sourceText;
     string[] words;
     int index;
-     [SerializeField] TextMeshProUGUI text;
+
+    [SerializeField] TextMeshProUGUI text;
+
+    [SerializeField] List<TextMeshProUGUI> lines;
 
     public void WriteWord(){
         text.text += words[index % words.Length] + " ";
@@ -20,6 +23,7 @@ public class ScriptManager : MonoBehaviour
     }
     public void Awake(){
         i = this;
+        
         words = sourceText.text.Split (new char[] { ' ' });
     }
 }
