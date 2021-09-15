@@ -40,6 +40,7 @@ public class Job
     public Job(Profession p){
         employees = new List<Monk>();
         jobType = p;
+        Setup();
     }
     public virtual void CalculateOutput(){
         output = productivity * employees.Count * Time.deltaTime;
@@ -53,9 +54,10 @@ public class MonasteryManager : MonoBehaviour
     public UnityEvent OnWordCompleted;
     public UnityEvent OnPageCompleted;
     public UnityEvent OnBookCompleted;
-    float wordsLastFrame;
+    float lettersLastFrame;
 
     [Header("floats")]
+    public float letters;
     public float words;
     public float pages = 10;
     public float pagesDone;
@@ -66,6 +68,9 @@ public class MonasteryManager : MonoBehaviour
     public int pagesWritten = 0;
     public int booksWritten = 1;
     public int wordsWritten;
+
+    float lettersToWrite;
+    int pagesCompleted;
     
     public List<Job> jobs;
     public Job prayers;
@@ -117,74 +122,82 @@ public class MonasteryManager : MonoBehaviour
         UIManager.i.UpdateProfession(jobs[0]);
     }
 
-    public void WriteWord(){
-        words += Mathf.Clamp(1, 0, Mathf.Floor(pages * Constants.WORDSPERPAGE));
+    public void FinishPage(){
+        pages --;
+        letters = 0;
+        lettersLastFrame = 0;
+
+        OnPageCompleted.Invoke();
+        pagesWritten ++;
+
+        Debug.Log("finished page");
+    }
+
+    public void FinishBook(){
+        booksWritten ++;
+        books --;
+        OnBookCompleted.Invoke();
+        UIManager.i.UpdateBookCount(booksWritten);
+    }
+
+    public void FinishWord(){
+        wordsWritten ++;
+        OnWordCompleted.Invoke();
+    }
+
+    public void WriteLetter(){
+        lettersToWrite ++;
     }
     public void Step(){
 
         year += Time.deltaTime * 0.1f;
+
         writers.CalculateOutput();
         bookBinders.CalculateOutput();
         paperMakers.CalculateOutput();
 
         //calculate page production
         pages += paperMakers.output; 
-        //add word production clamped by pages
-        words += Mathf.Clamp(writers.output, 0, Mathf.Floor(pages * Constants.WORDSPERPAGE));
 
         //calculate word delta
-        int wordsCompleted = (int)Mathf.Floor(Mathf.Clamp(words - wordsLastFrame, 0, 100000f));
+        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, 100000f));
+        int lettersWritten = 0;
+        pagesCompleted = 0;
 
-        //calculate pages filled
-        int pagesCompleted = (int)Mathf.Floor(words/Constants.WORDSPERPAGE);
-        
-        //subtract pages and words consumed this frame
+        if(pages >= 1){
+            for(int i = 0; i < lettersCompleted; i++){
+                if(pages >= 1){
+                    //continue writing while we still have pages
+                    
+                    ScriptManager.i.WriteLetter();
+                    lettersWritten ++;
+                    letters ++;
+                    lettersLastFrame = letters;
+                }
+            }
+
+            letters += writers.output % 1;
+        }
+
+        lettersToWrite = 0;
+
         //add to pageCounter
-        pages -= pagesCompleted;
-        words -= pagesCompleted * Constants.WORDSPERPAGE;
         pagesDone += pagesCompleted;
         
         //calculate bookbinding production
         books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(pagesDone / Constants.PAGESPERBOOK));
         int booksCompleted = (int) Mathf.Floor(books);
         pagesDone -= booksCompleted * Constants.PAGESPERBOOK;
+        // do something visually with the amount of pages in the stack?
 
         UIManager.i.unboundPages.SetText(pagesDone.ToString());
         UIManager.i.emptyPages.SetText(pages.ToString());
         UIManager.i.words.SetText(Mathf.Floor(words).ToString());
 
-        //fire events if words, pages, or books were completed;
-        if(wordsCompleted != 0){
+        
+        UIManager.i.UpdateWordCount(wordsWritten);
+        UIManager.i.UpdatePageCount(pagesWritten);
 
-            for(int i = 0; i < wordsCompleted; i++){
-                ScriptManager.i.WriteWord();
-                OnWordCompleted.Invoke();
-            }
-            
-            wordsLastFrame = words;
-            wordsWritten += wordsCompleted;
-            UIManager.i.UpdateWordCount(wordsWritten);
-        }
-
-        if(pagesCompleted != 0){
-            
-            for(int i = 0; i < pagesCompleted; i++){
-                ScriptManager.i.ClearPage();
-                wordsLastFrame = 0;
-                OnPageCompleted.Invoke();
-            }
-
-            pagesWritten += pagesCompleted;
-            UIManager.i.UpdatePageCount(pagesWritten);
-        }
-
-        if(booksCompleted != 0){
-            
-            booksWritten += booksCompleted;
-            books = 0;
-            OnBookCompleted.Invoke();
-            UIManager.i.UpdateBookCount(booksWritten);
-        }
     }
     
 }

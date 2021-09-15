@@ -10,5 +10,5 @@ public class Constants : MonoBehaviour
     public const float PRAYER_PRODUCTIVITY = 0.05f;
     public const float PAPERMAKER_PRODUCTIVITY = 0.05f;
     public const float BOOKBINDER_PRODUCTIVITY = 0.1f;
-    public const float WRITER_PRODUCTIVITY = 1f;
+    public const float WRITER_PRODUCTIVITY = 5f;
 }

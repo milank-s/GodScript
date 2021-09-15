@@ -23,9 +23,11 @@ public class Monk{
         lifeSpan -= Time.deltaTime;
     }
 }
+
 public class MonkManager : MonoBehaviour
 {
     public static MonkManager i;
+    
     public UnityEvent OnAddMonk;
     public UnityEvent OnRemoveMonk;
 
