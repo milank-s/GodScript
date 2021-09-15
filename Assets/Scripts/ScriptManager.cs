@@ -54,7 +54,6 @@ public class ScriptManager : MonoBehaviour
 
             bool isOverflow = curLine.isTextOverflowing;
 
-            Debug.Log(isOverflow);
 
              //now remove that shit
             curLine.text = curLine.text.Remove(curLine.text.Length - (curWord.Length + 1));

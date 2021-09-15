@@ -129,8 +129,7 @@ public class MonasteryManager : MonoBehaviour
 
         OnPageCompleted.Invoke();
         pagesWritten ++;
-
-        Debug.Log("finished page");
+        pagesDone++;
     }
 
     public void FinishBook(){
@@ -162,7 +161,6 @@ public class MonasteryManager : MonoBehaviour
         //calculate word delta
         int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, 100000f));
         int lettersWritten = 0;
-        pagesCompleted = 0;
 
         if(pages >= 1){
             for(int i = 0; i < lettersCompleted; i++){
@@ -180,9 +178,6 @@ public class MonasteryManager : MonoBehaviour
         }
 
         lettersToWrite = 0;
-
-        //add to pageCounter
-        pagesDone += pagesCompleted;
         
         //calculate bookbinding production
         books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(pagesDone / Constants.PAGESPERBOOK));
@@ -194,10 +189,8 @@ public class MonasteryManager : MonoBehaviour
         UIManager.i.emptyPages.SetText(pages.ToString());
         UIManager.i.words.SetText(Mathf.Floor(words).ToString());
 
-        
         UIManager.i.UpdateWordCount(wordsWritten);
         UIManager.i.UpdatePageCount(pagesWritten);
-
     }
     
 }
