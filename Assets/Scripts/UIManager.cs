@@ -19,9 +19,10 @@ public class UIManager : MonoBehaviour
     
 
     [Header ("Resources")]  
-    public Counter words;    
+    public Counter theismAmount;    
+    public Counter names;    
     public Counter emptyPages;     
-    public Counter unboundPages;    
+    public Counter currentPage;    
 
     
     [Header ("Progress")]
@@ -62,6 +63,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWordCount(int i){
         wordsTotal.SetText(i.ToString());
+    }
+
+    public void UpdatePrayerCount(int i){
+        theismAmount.SetText(i.ToString());
     }
 
 }

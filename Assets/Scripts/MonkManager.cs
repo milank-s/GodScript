@@ -33,7 +33,7 @@ public class MonkManager : MonoBehaviour
 
     public List<Monk> monks;
     
-    public void AddMonk(){
+    public Monk AddMonk(){
         Monk m = new Monk();
         monks.Add(m);
 
@@ -43,6 +43,8 @@ public class MonkManager : MonoBehaviour
         
         UIManager.i.AddToFeed(m.name + " has joined the monastery");
         MonasteryManager.i.AddMonk(m);
+
+        return m;
     }
 
     public void RemoveMonk(Monk m){
@@ -53,6 +55,10 @@ public class MonkManager : MonoBehaviour
     void Awake(){
         i = this;
         monks = new List<Monk>();
+    }
+
+    void Start(){
+        Monk m = AddMonk();
     }
 
     public void Step()

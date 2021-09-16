@@ -57,6 +57,7 @@ public class MonasteryManager : MonoBehaviour
     float lettersLastFrame;
 
     [Header("floats")]
+    public float names;
     public float letters;
     public float words;
     public float pages = 10;
@@ -122,6 +123,9 @@ public class MonasteryManager : MonoBehaviour
         UIManager.i.UpdateProfession(jobs[0]);
     }
 
+    public void DiscoverNames(int n){
+        UIManager.i.AddToFeed("A name of God was discovered");
+    }
     public void FinishPage(){
         pages --;
         letters = 0;
@@ -133,6 +137,8 @@ public class MonasteryManager : MonoBehaviour
     }
 
     public void FinishBook(){
+        Debug.Log("finished book");
+
         booksWritten ++;
         books --;
         OnBookCompleted.Invoke();
@@ -140,8 +146,23 @@ public class MonasteryManager : MonoBehaviour
     }
 
     public void FinishWord(){
+        names --;
         wordsWritten ++;
         OnWordCompleted.Invoke();
+    }
+
+    public void Pray(){
+        if(jobs[0].employees.Count > 0){
+            float n = Mathf.Floor(names);
+            UIManager.i.AddToFeed(jobs[0].employees[0].name + " prayed");
+            names += Constants.PRAYER_PRODUCTIVITY * 1;
+            if(Mathf.Floor(names) > n){
+                DiscoverNames((int)n);
+            }
+
+        }else{
+            UIManager.i.AddToFeed("There is no one to pray");
+        }
     }
 
     public void WriteLetter(){
@@ -151,18 +172,26 @@ public class MonasteryManager : MonoBehaviour
 
         year += Time.deltaTime * 0.1f;
 
+        prayers.CalculateOutput();
         writers.CalculateOutput();
         bookBinders.CalculateOutput();
         paperMakers.CalculateOutput();
 
         //calculate page production
+        float n = Mathf.Floor(names);
+        names += prayers.output;
+
+        if(Mathf.Floor(names) > n){
+            DiscoverNames((int)n);
+        }
+
         pages += paperMakers.output; 
 
         //calculate word delta
-        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, 100000f));
+        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, names));
         int lettersWritten = 0;
 
-        if(pages >= 1){
+        if(names >= 1 && pages >= 1){
             for(int i = 0; i < lettersCompleted; i++){
                 if(pages >= 1){
                     //continue writing while we still have pages
@@ -185,12 +214,13 @@ public class MonasteryManager : MonoBehaviour
         pagesDone -= booksCompleted * Constants.PAGESPERBOOK;
         // do something visually with the amount of pages in the stack?
 
-        UIManager.i.unboundPages.SetText(pagesDone.ToString());
+        UIManager.i.currentPage.SetText(pagesDone.ToString());
         UIManager.i.emptyPages.SetText(pages.ToString());
-        UIManager.i.words.SetText(Mathf.Floor(words).ToString());
+        UIManager.i.names.SetText(Mathf.Floor(names).ToString());
 
         UIManager.i.UpdateWordCount(wordsWritten);
         UIManager.i.UpdatePageCount(pagesWritten);
+        //  UIManager.i.UpdatePrayerCount((int)Mathf.Floor(theism));
     }
     
 }

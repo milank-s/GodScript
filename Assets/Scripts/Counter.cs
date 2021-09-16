@@ -6,7 +6,6 @@ public class Counter : TextObject
 {
 
     public void Awake(){
-        text.text = "0";
     }
     public override void SetText(string t){
         float amount = float.Parse(t);
