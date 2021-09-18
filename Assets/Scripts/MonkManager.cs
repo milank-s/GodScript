@@ -33,6 +33,9 @@ public class MonkManager : MonoBehaviour
 
     public List<Monk> monks;
     
+    public void CreateMonk(){
+        AddMonk();
+    }
     public Monk AddMonk(){
         Monk m = new Monk();
         monks.Add(m);

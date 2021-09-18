@@ -124,7 +124,7 @@ public class MonasteryManager : MonoBehaviour
     }
 
     public void DiscoverNames(int n){
-        UIManager.i.AddToFeed("A name of God was discovered");
+        UIManager.i.AddToFeed(jobs[0].employees[Random.Range(0, jobs[0].employees.Count)].name + " heard a name of God");
     }
     public void FinishPage(){
         pages --;
@@ -154,7 +154,6 @@ public class MonasteryManager : MonoBehaviour
     public void Pray(){
         if(jobs[0].employees.Count > 0){
             float n = Mathf.Floor(names);
-            UIManager.i.AddToFeed(jobs[0].employees[0].name + " prayed");
             names += Constants.PRAYER_PRODUCTIVITY * 1;
             if(Mathf.Floor(names) > n){
                 DiscoverNames((int)n);
