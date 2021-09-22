@@ -101,6 +101,7 @@ public class MonasteryManager : MonoBehaviour
     public void AddMonk(Monk m){
         jobs[0].employees.Add(m);
         UIManager.i.UpdateProfession(jobs[0]);
+        MonasteryVisuals.i.TryAddBuilding();
     }
     public void AssignWorker(Profession profession, int i){
         if(i > 0){
