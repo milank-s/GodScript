@@ -10,12 +10,6 @@ public class UIManager : MonoBehaviour
 
     [Header ("Feeds")]
     [SerializeField] TextScroll feed;
-
-    [Header ("Monk Data")]
-    [SerializeField] JobUI monkCount;
-    [SerializeField] JobUI writers;
-    [SerializeField] JobUI pagers;
-    [SerializeField] JobUI bookers;
     
 
     [Header ("Resources")]  
@@ -31,28 +25,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] Counter pagesTotal;    
     [SerializeField] Counter booksTotal;    
 
-    [SerializeField] List<JobUI> jobUI;
 
     public void AddToFeed(string t){
         feed.AddText(t);
     }
     public void Awake(){
         i = this;
-        jobUI = new List<JobUI>();
-        jobUI.Add(monkCount);
-        jobUI.Add(writers);
-        jobUI.Add(pagers);
-        jobUI.Add(bookers);
     }
 
     public void Step(){
         year.SetText(MonasteryManager.i.year.ToString("F0") + " AD");
     }
-    public void UpdateProfession(Job j){
-        JobUI job = jobUI[(int)j.jobType];
-        job.counter.SetText(j.employees.Count.ToString());
-    }
-
     public void UpdatePageCount(int i){
         pagesTotal.SetText(i.ToString());
     }

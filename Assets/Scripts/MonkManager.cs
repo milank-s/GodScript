@@ -52,7 +52,7 @@ public class MonkManager : MonoBehaviour
 
     public void RemoveMonk(Monk m){
         monks.Remove(m);
-        MonasteryManager.i.RemoveMonk(m);
+        MonasteryManager.i.jobs[m.job].RemoveMonk(m);
     }
 
     void Awake(){

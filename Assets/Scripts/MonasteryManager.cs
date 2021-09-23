@@ -3,50 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-public enum Profession {prayer, writer, papermaker, bookbinder}
-
-public class Job
-{
-    public Profession jobType;
-    public List<Monk> employees;
-    public float output;
-    public float productivity = 1;
-
-    public void Setup(){
-        switch(jobType){
-            case Profession.prayer:
-                productivity = Constants.PRAYER_PRODUCTIVITY;
-            break;
-
-            case Profession.writer:
-                productivity = Constants.WRITER_PRODUCTIVITY;
-            break;
-
-            case Profession.papermaker:
-                productivity = Constants.PAPERMAKER_PRODUCTIVITY;
-            break;
-
-            case Profession.bookbinder:
-                productivity = Constants.BOOKBINDER_PRODUCTIVITY;
-            break;
-        }
-    }
-    public Monk PopMonk(){
-        Monk m = employees[employees.Count -1];
-        employees.Remove(m);
-        return m;
-    }
-    public Job(Profession p){
-        employees = new List<Monk>();
-        jobType = p;
-        Setup();
-    }
-    public virtual void CalculateOutput(){
-        output = productivity * employees.Count * Time.deltaTime;
-    }
-    
-}
 public class MonasteryManager : MonoBehaviour
 {
     public float year = 856;
@@ -56,6 +12,7 @@ public class MonasteryManager : MonoBehaviour
     public UnityEvent OnBookCompleted;
     float lettersLastFrame;
 
+    
     [Header("floats")]
     public float names;
     public float letters;
@@ -73,59 +30,31 @@ public class MonasteryManager : MonoBehaviour
     float lettersToWrite;
     int pagesCompleted;
     
-    public List<Job> jobs;
-    public Job prayers;
-    public Job writers;
-    public Job bookBinders;
-    public Job paperMakers;
+    public Job prayers => jobs[Profession.prayer].job;
+    public Dictionary<Profession, Jobsite> jobs;
 
+    Job writers => jobs[Profession.writer].job;
+    Job paperMakers => jobs[Profession.papermaker].job;
+    Job bookBinders => jobs[Profession.bookbinder].job;
+
+    //LETS MOVE FROM INSTANTIATING ALL THE DIFF JOBS HERE TO HAVE DIFF JOB OBJECTS
+    //THAT INSTANTIATE THEMSELVES
+    //ALSO WHAT IF THE PLAYERS UNLOCK JOBS IN DIFF ORDERS
+    //AND THEN THE JOBS ARRAY GETS FUCKED UP?
+    
     public void Awake(){
         i = this;
-        prayers = new Job(Profession.prayer);
-        writers = new Job(Profession.writer);
-        bookBinders = new Job(Profession.bookbinder);
-        paperMakers = new Job(Profession.papermaker);
-        jobs = new List<Job>();
-        jobs.Add(prayers);
-        jobs.Add(writers);
-        jobs.Add(paperMakers);
-        jobs.Add(bookBinders);
-    }
-
-    public void RemoveMonk(Monk m){
-        Job j = jobs[(int)m.job];
-        j.employees.Remove(m);
-        UIManager.i.UpdateProfession(j);
+        jobs = new Dictionary<Profession, Jobsite>();
     }
 
     public void AddMonk(Monk m){
-        jobs[0].employees.Add(m);
-        UIManager.i.UpdateProfession(jobs[0]);
+        jobs[Profession.prayer].AddMonk(m);
+       
         MonasteryVisuals.i.TryAddBuilding();
-    }
-    public void AssignWorker(Profession profession, int i){
-        if(i > 0){
-            if(prayers.employees.Count > 0){
-                Monk m = jobs[0].PopMonk();
-                m.job = profession;
-                jobs[(int)profession].employees.Add(m);
-                UIManager.i.AddToFeed(m.name + " became a " + m.job);
-            }
-        }else{
-            if(jobs[(int)profession].employees.Count > 0){
-                
-                Monk m = jobs[(int)profession].PopMonk();
-                m.job = Profession.prayer;
-                jobs[0].employees.Add(m);
-            }
-        }
-        
-        UIManager.i.UpdateProfession(jobs[(int)profession]);
-        UIManager.i.UpdateProfession(jobs[0]);
     }
 
     public void DiscoverNames(int n){
-        UIManager.i.AddToFeed(jobs[0].employees[Random.Range(0, jobs[0].employees.Count)].name + " heard a name of God");
+        UIManager.i.AddToFeed(jobs[0].job.employees[Random.Range(0, jobs[0].job.employees.Count)].name + " heard a name of God");
     }
     public void FinishPage(){
         pages --;
@@ -153,7 +82,7 @@ public class MonasteryManager : MonoBehaviour
     }
 
     public void Pray(){
-        if(jobs[0].employees.Count > 0){
+        if(jobs[0].job.employees.Count > 0){
             float n = Mathf.Floor(names);
             names += Constants.PRAYER_PRODUCTIVITY * 1;
             if(Mathf.Floor(names) > n){
@@ -171,11 +100,6 @@ public class MonasteryManager : MonoBehaviour
     public void Step(){
 
         year += Time.deltaTime * 0.1f;
-
-        prayers.CalculateOutput();
-        writers.CalculateOutput();
-        bookBinders.CalculateOutput();
-        paperMakers.CalculateOutput();
 
         //calculate page production
         float n = Mathf.Floor(names);
