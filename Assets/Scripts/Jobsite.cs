@@ -58,11 +58,12 @@ public class Jobsite : Unlock
     public Counter employeeCounter;
     public Resource buildings;
 
-    public void Setup(){
+
+    public void Start(){
         job = new Job(jobType);
         MonasteryManager.i.jobs.Add(jobType, this);
     }
-    public void Step(){
+    public void Update(){
         job.CalculateOutput();
     }
 

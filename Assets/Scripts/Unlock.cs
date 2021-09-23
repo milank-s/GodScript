@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- public enum Unlocks{STUDIES, BOOKBINDERS, PRINTING_PRESS, LIBRARY, GARDENS, PONDS, RELIQUARY, CRYPTS}
+ public enum Unlocks{CHURCH, STUDIES, BOOKBINDERS, PRINTING_PRESS, LIBRARY, GARDENS, PONDS, RELIQUARY, CRYPTS}
 
 
 public class Unlock : MonoBehaviour
