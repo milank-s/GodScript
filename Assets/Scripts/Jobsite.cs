@@ -68,7 +68,9 @@ public class Jobsite : Unlock
     }
 
     public void TryAssignWorker(int i){
+        
         if(i > 0){
+
             if(MonasteryManager.i.prayers.employees.Count > 0){
                 Monk m = MonasteryManager.i.prayers.PopMonk();
                 MonasteryManager.i.jobs[Profession.prayer].RemoveMonk(m);
@@ -79,8 +81,8 @@ public class Jobsite : Unlock
             if(job.employees.Count > 0){
                 
                 Monk m = job.PopMonk();
-                RemoveMonk(m);
                 MonasteryManager.i.jobs[Profession.prayer].AddMonk(m);
+                RemoveMonk(m);
             }
         }        
     }
