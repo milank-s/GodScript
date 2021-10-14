@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void Step(){
-        year.SetText(MonasteryManager.i.year.ToString("F0") + " AD");
+        year.SetText(GameProgress.i.year.ToString("F0") + " AD");
     }
     public void UpdatePageCount(int i){
         pagesTotal.SetText(i.ToString());

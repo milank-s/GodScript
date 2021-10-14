@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
         MonkManager.i.Step();
         MonasteryManager.i.Step();
 
-        if(Time.time > time){
-            MonkManager.i.AddMonk();
-            time = Time.time + 0.025f;
-        }
+        // if(Time.time > time){
+        //     MonkManager.i.AddMonk();
+        //     time = Time.time + 0.025f;
+        // }
+        
         UIManager.i.Step();
     }
 }

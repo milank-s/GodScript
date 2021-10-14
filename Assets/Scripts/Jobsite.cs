@@ -59,7 +59,7 @@ public class Jobsite : Unlock
     public Resource buildings;
 
 
-    public void Start(){
+    public void Awake(){
         job = new Job(jobType);
         MonasteryManager.i.jobs.Add(jobType, this);
     }
