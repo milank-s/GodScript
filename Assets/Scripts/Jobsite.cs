@@ -63,6 +63,11 @@ public class Jobsite : Unlock
         job = new Job(jobType);
         MonasteryManager.i.jobs.Add(jobType, this);
     }
+
+    public void Start(){
+        base.Start();
+    }
+    
     public void Update(){
         job.CalculateOutput();
     }

@@ -9,14 +9,29 @@ public class GameProgress : MonoBehaviour
     public float year = 1000;
     public enum Stage{intro}
 
-    
+    public Stage stage;
     public void Awake(){
         i = this;
     }
 
+    [Header("Sequences")]
+    public Sequence startSequence;
 
-    public void BeginStage(){
+    void Start(){
+        StartCoroutine(BeginStage());
+    }
+
+
+    void Update(){
+        
+        UIManager.i.year.SetText(GameProgress.i.year.ToString("F0") + " AD");
 
     }
+    public IEnumerator BeginStage(){
+        Stage s = stage;
+
+        yield return StartCoroutine(startSequence.SequenceBody());
+    }
+    
 
 }

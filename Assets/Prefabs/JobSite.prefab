@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276859d6d71bcd146ba3ebd41c575240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unlocked: 0
   unlock: 0
-  visualRoot: {fileID: 0}
+  visualRoot: {fileID: 1181635798807502156}
   jobType: 0
   employeeCounter: {fileID: 474867800189527277}
 --- !u!1001 &8194168662126828377

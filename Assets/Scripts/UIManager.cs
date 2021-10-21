@@ -20,10 +20,10 @@ public class UIManager : MonoBehaviour
 
     
     [Header ("Progress")]
-    [SerializeField] TextObject year;    
+    public TextObject year;    
     [SerializeField] Counter wordsTotal;    
     [SerializeField] Counter pagesTotal;    
-    [SerializeField] Counter booksTotal;    
+    public Counter booksTotal;    
 
 
     public void AddToFeed(string t){

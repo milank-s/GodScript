@@ -8,12 +8,22 @@ using UnityEngine;
 public class Unlock : MonoBehaviour
 {
 
-    bool unlocked;
+    public bool unlocked;
     public Unlocks unlock;
     public Transform visualRoot;
     public Resource output;
 
 
+    public virtual void Start(){
+        Lock(unlocked);
+    }
+
+    public void Lock(bool b){
+        Show(b);
+    }
+    public void Show(bool b){
+        visualRoot.gameObject.SetActive(b);
+    }
 
     
 }

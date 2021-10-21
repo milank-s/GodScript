@@ -4,7 +4,10 @@ using UnityEngine;
 using TMPro;
 
 public class ScriptManager : MonoBehaviour
+
 {
+
+
     public static ScriptManager i;
     public TextAsset sourceText;
     string[] words;
@@ -17,6 +20,8 @@ public class ScriptManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI dropCap;
+
+    [SerializeField] TextObject title;
 
     [SerializeField] List<TextMeshProUGUI> lines;
 
