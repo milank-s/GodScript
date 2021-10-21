@@ -1,11 +1,11 @@
-﻿using System.Collections;
+ 
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MonasteryManager : MonoBehaviour
 {
-    public float year = 856;
     public static MonasteryManager i;
     public UnityEvent OnWordCompleted;
     public UnityEvent OnPageCompleted;
@@ -49,8 +49,8 @@ public class MonasteryManager : MonoBehaviour
 
     public void AddMonk(Monk m){
         jobs[Profession.prayer].AddMonk(m);
-       
-        MonasteryVisuals.i.TryAddBuilding();
+
+        // MonasteryVisuals.i.TryAddBuilding();
     }
 
     public void DiscoverNames(int n){
@@ -97,9 +97,8 @@ public class MonasteryManager : MonoBehaviour
     public void WriteLetter(){
         lettersToWrite ++;
     }
+    
     public void Step(){
-
-        year += Time.deltaTime * 0.1f;
 
         //calculate page production
         float n = Mathf.Floor(names);
