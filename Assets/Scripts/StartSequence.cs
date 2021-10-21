@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class StartSequence : Sequence
 {
-    public SpriteRenderer background;
-    public SpriteRenderer star;
-    public IEnumerator SequenceBody(){
-        yield return UIManager.i.currentPage.Reveal();
-        yield return UIManager.i.booksTotal.Reveal();
+    public SpriteObject background;
+    public SpriteObject star;
+    public TextObject title;
+    public override IEnumerator SequenceBody(){
+        
+        yield return new WaitForSeconds(1f);
+
+        yield return StartCoroutine(star.Reveal(2));
+        yield return StartCoroutine(background.Reveal(1));
+
+        yield return new WaitForSeconds(2f);
+
+        yield return StartCoroutine(UIManager.i.booksTotal.Reveal(1));
+
+        yield return new WaitForSeconds(0.5f);
+
+        yield return StartCoroutine(UIManager.i.currentPage.Reveal(1));
+        
+        yield return new WaitForSeconds(0.5f);
+
+        yield return StartCoroutine(title.Reveal(1));
     }
 }

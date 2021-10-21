@@ -64,10 +64,10 @@ public class Jobsite : Unlock
         MonasteryManager.i.jobs.Add(jobType, this);
     }
 
-    public void Start(){
+    public override void Start(){
         base.Start();
     }
-    
+
     public void Update(){
         job.CalculateOutput();
     }

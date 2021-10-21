@@ -60,10 +60,6 @@ public class MonkManager : MonoBehaviour
         monks = new List<Monk>();
     }
 
-    void Start(){
-        Monk m = AddMonk();
-    }
-
     public void Step()
     {
         List<Monk> deadMonks = new List<Monk>();

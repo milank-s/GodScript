@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: 35, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4016177588536649254
@@ -64,10 +64,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 51ea06332f25ee34db96702e5d05b64c, type: 2}
+  m_sharedMaterial: {fileID: 5204426854252643878, guid: 51ea06332f25ee34db96702e5d05b64c,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -180,6 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3420379888858676513}
   - component: {fileID: 5351328873190704131}
+  - component: {fileID: 886757750164756559}
   - component: {fileID: 6934452173979189264}
   m_Layer: 5
   m_Name: Title
@@ -215,6 +217,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473649079611015507}
   m_CullTransparentMesh: 0
+--- !u!114 &886757750164756559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473649079611015507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff28b6d5531a4b4a8f78628a724f03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  text: {fileID: 6934452173979189264}
 --- !u!114 &6934452173979189264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Counter
+  m_text: 'Page
 
 '
   m_isRightToLeft: 0
@@ -331,7 +347,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7598273627396492355}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -364,5 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661dbbc5be072454c947c95e479e574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualRoot: {fileID: 6273113669616554935}
+  visible: 0
   text: {fileID: 7270804615742209020}
+  title: {fileID: 886757750164756559}

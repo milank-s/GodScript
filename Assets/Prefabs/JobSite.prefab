@@ -191,6 +191,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ValueChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 8584029408684441524, guid: 8fb800113ca2c8241949e7466be18f67,
+        type: 3}
+      propertyPath: visualRoot
+      value: 
+      objectReference: {fileID: 2128672317488741901}
     m_RemovedComponents:
     - {fileID: 4101385328033534202, guid: 8fb800113ca2c8241949e7466be18f67, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8fb800113ca2c8241949e7466be18f67, type: 3}
@@ -212,3 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661dbbc5be072454c947c95e479e574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2128672317488741901 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7799417385549210964, guid: 8fb800113ca2c8241949e7466be18f67,
+    type: 3}
+  m_PrefabInstance: {fileID: 8194168662126828377}
+  m_PrefabAsset: {fileID: 0}

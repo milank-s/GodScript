@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
-
     public static UIManager i;
 
     [Header ("Feeds")]
@@ -33,9 +32,6 @@ public class UIManager : MonoBehaviour
         i = this;
     }
 
-    public void Step(){
-        year.SetText(GameProgress.i.year.ToString("F0") + " AD");
-    }
     public void UpdatePageCount(int i){
         pagesTotal.SetText(i.ToString());
     }
