@@ -537,6 +537,7 @@ MonoBehaviour:
   visible: 1
   text: {fileID: 1869028202}
   currentLine: {fileID: 2096015794}
+  typing: 0
   speed: 0.2
 --- !u!222 &105057930
 CanvasRenderer:
@@ -6286,6 +6287,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 105057927}
     m_Modifications:
+    - target: {fileID: 2813498473073535894, guid: 772e4e879319ade488f95f9555f980cb,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2813498473073535894, guid: 772e4e879319ade488f95f9555f980cb,
         type: 3}
       propertyPath: m_fontSize

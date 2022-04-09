@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public static UIManager i;
 
     [Header ("Feeds")]
-    [SerializeField] TextScroll feed;
+    public TextScroll feed;
     
 
     [Header ("Resources")]  
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public void AddToFeed(string t){
         feed.AddText(t);
     }
-    
+
     public void Awake(){
         i = this;
     }

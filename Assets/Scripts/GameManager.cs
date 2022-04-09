@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         Stage curStage = stage;
 
         foreach(Sequence s in sequences){
-            yield return StartCoroutine(s.SequenceBody());
+            yield return StartCoroutine(s.PlaySequence());
         }
 
         running = true;

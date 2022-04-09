@@ -28,9 +28,7 @@ public class TextObject : UIObject
 
     public override IEnumerator Reveal(float time = 1)
     {   
-        
         yield return StartCoroutine(Effects.Type(time, text, textCached));
-
         Show(true);
     }
 }

@@ -9,7 +9,7 @@ public class TextScroll : TextObject
 
     public TextObject currentLine;
 
-    bool typing;
+    public bool typing;
     int index;
     public float speed = 0.25f;
     public void Awake(){
@@ -49,6 +49,10 @@ public class TextScroll : TextObject
             for(int i = feedReadout.Length-1; i>=0; i--){
                 text.text += feedReadout[i] + '\n';
             }
+            
+            // foreach(string s in written){
+            //     text.text += s + '\n';
+            // }
         }
 
         string t2 = writing.Peek();
