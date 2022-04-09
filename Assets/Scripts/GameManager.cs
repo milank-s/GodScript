@@ -9,29 +9,42 @@ public class GameManager : MonoBehaviour
     public enum Stage{intro}
 
     public bool running = false;
+
+    public float startingPages = 3;
+    
     public Stage stage;
     
     Dictionary<Rooms, Room> rooms;
-    
+
+    [Header("Sequences")]
+    public Sequence[] sequences;
+
     public void Awake(){
         i = this;
         rooms = new Dictionary<Rooms, Room>();
         
+        Initialize();
+    }
+
+    void Start(){
+        
+        UIManager.i.year.SetText(year.ToString("F0") + " AD");
+        StartCoroutine(GameLoop());
+    }
+
+    public void Initialize(){
         if(PlayerPrefs.HasKey("stage")){
             stage = (Stage)PlayerPrefs.GetInt("stage");
         }else{
             stage = Stage.intro;
             PlayerPrefs.SetInt("stage", (int)Stage.intro);
         }
-    }
 
-    [Header("Sequences")]
-    public Sequence[] sequences;
-
-    void Start(){
-        
-        UIManager.i.year.SetText(year.ToString("F0") + " AD");
-        StartCoroutine(GameLoop());
+        if(PlayerPrefs.HasKey("year")){
+            year = PlayerPrefs.GetInt("year");
+        }else{
+            PlayerPrefs.SetInt("year", (int)year);
+        }
     }
 
     public void Step(){
@@ -40,6 +53,15 @@ public class GameManager : MonoBehaviour
             Main.monks.Step();
             ScriptManager.i.Step();
         }
+    }
+
+    public void Pray(){
+        Resources.names.Increment();
+        UIManager.i.AddToFeed("yes");
+    }
+
+    public void AddMonk(){
+        Main.monks.MonkArrival();
     }
 
     public void UnlockRoom(Rooms roomType){

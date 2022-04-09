@@ -9,8 +9,8 @@ public class Effects : MonoBehaviour
         t.text = "";
         
         for(int i = 0; i < text.Length; i++){
-           t.text += text[i];
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.15f));
+            t.text += text[i];
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.15f) * time);
         }
     }
 

@@ -64,13 +64,8 @@ public class ScriptManager : MonoBehaviour
         OnWordCompleted.Invoke();
     }
 
-    public void WriteLetter(){
-        lettersToWrite ++;
-    }
-    
     public void Step(){
  
-
         //calculate word delta
         int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, names));
         int lettersWritten = 0;

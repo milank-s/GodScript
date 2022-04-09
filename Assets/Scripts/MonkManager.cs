@@ -13,19 +13,19 @@ public class MonkManager
         monks = new List<Monk>();
     }
 
-    public void CreateMonk(){
-        AddMonk();
+
+    public void MonkArrival(){
+        Monk m = CreateMonk();
+        UIManager.i.AddToFeed(m.name + " has joined the monastery");
     }
     
-    public Monk AddMonk(){
+    public Monk CreateMonk(){
         Monk m = new Monk();
         monks.Add(m);
 
         if(OnAddMonk != null){
             OnAddMonk.Invoke();
         }
-        
-        UIManager.i.AddToFeed(m.name + " has joined the monastery");
         
         JobManager.i.AssignJob(m, Profession.prayer);
 

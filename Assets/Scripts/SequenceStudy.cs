@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrayerSequence : Sequence
+public class SequenceStudy : Sequence
 {
     
     public override IEnumerator SequenceBody(){

@@ -6,7 +6,7 @@ using TMPro;
 public class TextObject : UIObject
 {
     
-    [SerializeField] protected TextMeshProUGUI text;
+    public TextMeshProUGUI text;
     string textCached;
     public override void Start()
     {

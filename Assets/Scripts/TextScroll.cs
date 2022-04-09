@@ -4,21 +4,56 @@ using UnityEngine;
 
 public class TextScroll : TextObject
 {
-    public Queue<string> writing;
+    Queue<string> writing;
+    Queue<string> written;
 
+    public TextObject currentLine;
+
+    bool typing;
+    int index;
+    public float speed = 0.25f;
     public void Awake(){
         writing = new Queue<string>();
+        written = new Queue<string>();
     }
     public void AddText(string t){
+
         writing.Enqueue(t);
-        if(writing.Count > 5){
-            writing.Dequeue();
+        if(!typing && writing.Count == 1){
+            StartCoroutine(TypeLine());
+        }
+    }
+
+    void Update(){
+        if(!typing && writing.Count > 1){
+            StartCoroutine(TypeLine());
+        }
+    }
+
+    IEnumerator TypeLine(){
+
+        typing = true;
+
+        if(writing.Count > 1){
+            string t = writing.Dequeue();
+            written.Enqueue(t);
+            
+            if(written.Count > 5){
+                written.Dequeue();
+            }
+
+            text.text = "";
+            
+            string[] feedReadout =  written.ToArray();
+
+            for(int i = feedReadout.Length-1; i>=0; i--){
+                text.text += feedReadout[i] + '\n';
+            }
         }
 
-        text.text = "";
-        foreach(string s in writing){
-            text.text += s + '\n';
-        }
+        string t2 = writing.Peek();
 
+        yield return StartCoroutine(Effects.Type(speed, currentLine.text, t2));
+        typing = false;
     }
 }

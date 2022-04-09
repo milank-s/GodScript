@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public void AddToFeed(string t){
         feed.AddText(t);
     }
+    
     public void Awake(){
         i = this;
     }
