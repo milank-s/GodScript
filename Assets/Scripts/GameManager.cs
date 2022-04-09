@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public bool running = false;
 
-    public List<Room> rooms;
+    public Dictionary<Rooms, Room> rooms;
     public Stage stage;
     public void Awake(){
         i = this;
@@ -33,8 +33,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenRoom(Rooms roomType){
-
+    public void UnlockRoom(Rooms roomType){
+        Room r = null;
+        if(rooms.TryGetValue(roomType, out r)){
+            r.Unlock();
+        }
     }
     public void SetupUnlock(Room u){
 
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(u.roomType.ToString(), 1);
         }
 
-        rooms.Add(u);
+        rooms.Add(u.roomType, u);
     }
 
     public IEnumerator GameLoop(){
