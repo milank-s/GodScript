@@ -7,7 +7,7 @@ public class Resource
     public delegate void NewValueEvent(int a);
     public ResourceType resourceType;
     public float amount;
-
+    float prevAmount;
     public NewValueEvent OnWholeNumberChanged;
 
     public Resource(ResourceType r){
@@ -25,23 +25,28 @@ public class Resource
         }
     }
 
-    public void AddOutput(float diff){
-       
-        float prevAmount = Mathf.Floor(amount);
-        float newAmount = prevAmount + diff;
+    public void Tick(){
         
-        if(Mathf.Floor(newAmount) > prevAmount){
+        if(Mathf.Floor(amount) > prevAmount){
             UpdateValue();
         }
 
-        amount = newAmount;
+        prevAmount = amount;
+    }
+
+    public void Increment(){
+        amount ++;
+    }
+
+    public void Decrement(){
+        amount --;
+    }
+
+    public void AddOutput(float diff){
+        amount += diff;
     }
 
     public void SetOutput(float a){
-       
         amount = a;
-        
-        UpdateValue();
-        
     }
 }

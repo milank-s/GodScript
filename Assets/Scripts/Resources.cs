@@ -9,16 +9,17 @@ public enum ResourceType{
     books = 2,
     pagesDone = 3,
     wordsDone = 4,
-    booksDone = 5
+    booksDone = 5,
+    pagesWritten
 }
 
 public class Resources
 {
     public static Dictionary<ResourceType, Resource> resourceRefs;
     
-    Resource names;
-    Resource pages;
-    Resource books;
+    public static Resource names;
+    public static Resource pages;
+    public static Resource books;
     public Resources(){
 
         resourceRefs = new Dictionary<ResourceType, Resource>();
@@ -29,6 +30,26 @@ public class Resources
 
             SetResourceRef(r, (ResourceType)i);
         }
+    }
+
+    public static void Increment(ResourceType resourceType){
+        Resource r;
+
+        if(resourceRefs.TryGetValue(resourceType, out r)){
+            r.Increment();
+        }
+    }
+
+    public static void Decrement(ResourceType resourceType){
+        Resource r;
+
+        if(resourceRefs.TryGetValue(resourceType, out r)){
+            r.Decrement();
+        }
+    }
+
+    public static void Set(){
+
     }
 
     void SetResourceRef(Resource r, ResourceType i){
@@ -56,5 +77,15 @@ public class Resources
         }
 
         return null;
+    }
+
+    public void UpdateResourceAmounts(){
+        foreach(int i in System.Enum.GetValues(typeof(ResourceType))){
+            
+            Resource r;
+            if(resourceRefs.TryGetValue((ResourceType) i, out r)){
+                r.Tick();
+            }
+        }
     }
 }

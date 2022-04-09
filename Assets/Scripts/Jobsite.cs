@@ -31,7 +31,6 @@ public class Job
         Setup();
     }
 
-    
     public void AddMonk(Monk m){
         employees.Add(m);
         m.job = jobType;

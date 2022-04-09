@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6209220257884480495}
   - component: {fileID: 4564936391580711533}
   m_Layer: 5
-  m_Name: PageTotal
+  m_Name: CounterResource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6209220257884480495
@@ -61,6 +61,7 @@ MonoBehaviour:
   visible: 0
   text: {fileID: 6611001888825889885}
   title: {fileID: 3681565220009408494}
+  resourceType: 0
 --- !u!1 &6408153103867129586
 GameObject:
   m_ObjectHideFlags: 0

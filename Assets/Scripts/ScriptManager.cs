@@ -29,10 +29,6 @@ public class ScriptManager : MonoBehaviour
 
     [Header("ints")]
 
-    public int pagesWritten = 0;
-    public int booksWritten = 1;
-    public int wordsWritten;
-
     float lettersToWrite;
     int pagesCompleted;
     
@@ -48,21 +44,23 @@ public class ScriptManager : MonoBehaviour
         lettersLastFrame = 0;
 
         OnPageCompleted.Invoke();
-        pagesWritten ++;
-        pagesDone++;
+        Resources.pages.Decrement();
+        Resources.Increment(ResourceType.pagesDone);
+        Resources.Increment(ResourceType.pagesWritten);
     }
 
     public void FinishBook(){
         Debug.Log("finished book");
 
         OnBookCompleted.Invoke();
-        Resources.GetResource(ResourceType.booksDone).AddOutput(1);
-        Resources.GetResource(ResourceType.books).AddOutput(-1);
+        Resources.Increment(ResourceType.booksDone);
+        Resources.Decrement(ResourceType.books);
     }
 
     public void FinishWord(){
-        names --;
-        wordsWritten ++;
+        
+        Resources.names.Decrement();
+        Resources.Increment(ResourceType.wordsDone);
         OnWordCompleted.Invoke();
     }
 
@@ -71,10 +69,7 @@ public class ScriptManager : MonoBehaviour
     }
     
     public void Step(){
-
-        //calculate page production
-
-        pages += paperMakers.output; 
+ 
 
         //calculate word delta
         int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, names));
@@ -98,16 +93,12 @@ public class ScriptManager : MonoBehaviour
         lettersToWrite = 0;
         
         //calculate bookbinding production
-        books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(pagesDone / Constants.PAGESPERBOOK));
+        books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(Resources.GetResource(ResourceType.pagesWritten).amount / Constants.PAGESPERBOOK));
         int booksCompleted = (int) Mathf.Floor(books);
-        pagesDone -= booksCompleted * Constants.PAGESPERBOOK;
-        // do something visually with the amount of pages in the stack?
+        
+        Resources.GetResource(ResourceType.pagesWritten).AddOutput(-booksCompleted * Constants.PAGESPERBOOK);
+        
 
-        UIManager.i.currentPage.SetText(pagesDone.ToString());
-        UIManager.i.emptyPages.SetText(pages.ToString());
-        UIManager.i.names.SetText(Mathf.Floor(names).ToString());
-
-        Resources.GetResource(ResourceType.booksDone).SetOutput(booksWritten);
         //  UIManager.i.UpdatePrayerCount((int)Mathf.Floor(theism));
     }
     
