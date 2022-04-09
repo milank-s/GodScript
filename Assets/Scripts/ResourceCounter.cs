@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Counter : TextObject
+public class ResourceCounter : Counter
 {
-    public TextObject title;
-    
-    public override void Start(){
-        base.Start();
+    public ResourceType resourceType;
+    Resource r;
+    public void Awake(){
+        title.SetText(resourceType.ToString());
+        r = Resources.GetResource(resourceType);
+        r.OnWholeNumberChanged += SetAmount;
     }
+
     public override IEnumerator Reveal(float time = 1){
         
         yield return StartCoroutine(title.Reveal(1));

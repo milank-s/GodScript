@@ -55,20 +55,15 @@ public class ScriptManager : MonoBehaviour
     public void FinishBook(){
         Debug.Log("finished book");
 
-        booksWritten ++;
-        books --;
         OnBookCompleted.Invoke();
-        UIManager.i.UpdateBookCount(booksWritten);
+        Resources.GetResource(ResourceType.booksDone).AddOutput(1);
+        Resources.GetResource(ResourceType.books).AddOutput(-1);
     }
 
     public void FinishWord(){
         names --;
         wordsWritten ++;
         OnWordCompleted.Invoke();
-    }
-
-    public void Pray(){
-
     }
 
     public void WriteLetter(){
@@ -112,8 +107,7 @@ public class ScriptManager : MonoBehaviour
         UIManager.i.emptyPages.SetText(pages.ToString());
         UIManager.i.names.SetText(Mathf.Floor(names).ToString());
 
-        UIManager.i.UpdateWordCount(wordsWritten);
-        UIManager.i.UpdatePageCount(pagesWritten);
+        Resources.GetResource(ResourceType.booksDone).SetOutput(booksWritten);
         //  UIManager.i.UpdatePrayerCount((int)Mathf.Floor(theism));
     }
     

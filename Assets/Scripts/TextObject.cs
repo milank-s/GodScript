@@ -22,6 +22,10 @@ public class TextObject : UIObject
         textCached = t;
     }
 
+    public virtual void SetAmount(int i){
+        text.text = i.ToString();
+    }
+
     public override IEnumerator Reveal(float time = 1)
     {   
         
