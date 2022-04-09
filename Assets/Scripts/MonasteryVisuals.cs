@@ -17,7 +17,7 @@ public class MonasteryVisuals : MonoBehaviour
     }
 
     public void TryAddBuilding(){
-        if(MonkManager.i.monks.Count > (index + 1) * 10){
+        if(Main.monks.monks.Count > (index + 1) * 10){
             ShowNewSprite();
         }
     }

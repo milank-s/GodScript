@@ -8,6 +8,8 @@ public class StartSequence : Sequence
     public SpriteObject star;
     public TextObject title;
     public override IEnumerator SequenceBody(){
+
+        yield return StartCoroutine(UIManager.i.year.Reveal(1));
         
         yield return new WaitForSeconds(1f);
 
@@ -25,5 +27,8 @@ public class StartSequence : Sequence
         yield return new WaitForSeconds(0.5f);
 
         yield return StartCoroutine(title.Reveal(1));
+
+        Main.manager.running = true;
+
     }
 }

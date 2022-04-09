@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- public enum Unlocks{CHURCH, STUDIES, BOOKBINDERS, PRINTING_PRESS, LIBRARY, GARDENS, PONDS, RELIQUARY, CRYPTS}
+ public enum Rooms{CHURCH, STUDIES, BOOKBINDERS, PRINTING_PRESS, LIBRARY, GARDENS, PONDS, RELIQUARY, CRYPTS}
 
 
-public class Unlock : MonoBehaviour
+public class Room : MonoBehaviour
 {
-
     public bool unlocked;
-    public Unlocks unlock;
+    public Rooms roomType;
     public Transform visualRoot;
-    public Resource output;
-
 
     public virtual void Start(){
-        Lock(unlocked);
+        Main.manager.SetupUnlock(this);
     }
 
     public void Lock(bool b){
         Show(b);
     }
+
+    public void Unlock(){
+        Show(true);
+        PlayerPrefs.SetInt(roomType.ToString(), 0);
+    }
+
     public void Show(bool b){
         visualRoot.gameObject.SetActive(b);
     }
-
-    
 }

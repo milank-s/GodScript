@@ -780,7 +780,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337755368}
-  - component: {fileID: 337755370}
   - component: {fileID: 337755369}
   m_Layer: 5
   m_Name: Script
@@ -818,34 +817,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 337755367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: f309fe9dd8b852d4093ff4b8bfa00308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &337755370
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337755367}
-  m_CullTransparentMesh: 0
+  sourceText: {fileID: 4900000, guid: b0ec8cddc75d51447b90e7e109e72a82, type: 3}
+  text: {fileID: 1501249137}
+  dropCap: {fileID: 754729762}
+  title: {fileID: 7791378737870794220}
+  lines:
+  - {fileID: 1501249137}
+  - {fileID: 324548104}
+  - {fileID: 953435405}
+  - {fileID: 677472381}
+  - {fileID: 2092669853}
+  - {fileID: 674272875}
+  - {fileID: 654648031}
+  - {fileID: 129943551}
+  - {fileID: 1797850593}
+  - {fileID: 1926674295}
+  - {fileID: 92135361}
+  - {fileID: 406587775}
+  - {fileID: 750638334}
 --- !u!4 &341100492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5918421344941925586, guid: 9369ea1ad0783b14986eeeccccbcf453,
@@ -1357,6 +1349,49 @@ Transform:
   m_Father: {fileID: 820548310}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &564378700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 564378701}
+  - component: {fileID: 564378702}
+  m_Layer: 5
+  m_Name: Prayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &564378701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564378700}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 900542811}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &564378702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564378700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0beb7846990ee334e94c32a6cecc6dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &569615366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,7 +2694,7 @@ GameObject:
   - component: {fileID: 853706502}
   - component: {fileID: 853706503}
   m_Layer: 5
-  m_Name: Monastery
+  m_Name: Script
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2719,7 +2754,7 @@ PrefabInstance:
     - target: {fileID: 2813498473073535894, guid: 772e4e879319ade488f95f9555f980cb,
         type: 3}
       propertyPath: m_text
-      value: 400AD
+      value: 1000AD
       objectReference: {fileID: 0}
     - target: {fileID: 2813498473073535894, guid: 772e4e879319ade488f95f9555f980cb,
         type: 3}
@@ -2884,6 +2919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 370019335}
+  - {fileID: 564378701}
   m_Father: {fileID: 1020884313}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3153,8 +3189,6 @@ GameObject:
   - component: {fileID: 1020884313}
   - component: {fileID: 1020884314}
   - component: {fileID: 1020884317}
-  - component: {fileID: 1020884315}
-  - component: {fileID: 1020884316}
   m_Layer: 5
   m_Name: MANAGERS
   m_TagString: Untagged
@@ -3176,6 +3210,7 @@ Transform:
   - {fileID: 853706502}
   - {fileID: 1536011360}
   - {fileID: 900542811}
+  - {fileID: 1427104243}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3191,54 +3226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb4ad19d3f370a40a196d88c3c58924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1020884315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020884312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0952067dc9840947adc5ae198eb1e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAddMonk:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRemoveMonk:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1020884316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020884312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f309fe9dd8b852d4093ff4b8bfa00308, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sourceText: {fileID: 4900000, guid: b0ec8cddc75d51447b90e7e109e72a82, type: 3}
-  text: {fileID: 1501249137}
-  dropCap: {fileID: 754729762}
-  title: {fileID: 7791378737870794220}
-  lines:
-  - {fileID: 1501249137}
-  - {fileID: 324548104}
-  - {fileID: 953435405}
-  - {fileID: 677472381}
-  - {fileID: 2092669853}
-  - {fileID: 674272875}
-  - {fileID: 654648031}
-  - {fileID: 129943551}
-  - {fileID: 1797850593}
-  - {fileID: 1926674295}
-  - {fileID: 92135361}
-  - {fileID: 406587775}
-  - {fileID: 750638334}
+  gameManager: {fileID: 1020884317}
 --- !u!114 &1020884317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3254,7 +3242,9 @@ MonoBehaviour:
   year: 1000
   running: 0
   stage: 0
-  startSequence: {fileID: 370019336}
+  sequences:
+  - {fileID: 370019336}
+  - {fileID: 564378702}
 --- !u!1 &1059089922
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,6 +4061,49 @@ Transform:
   m_Father: {fileID: 1133203550}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1427104242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427104243}
+  - component: {fileID: 1427104244}
+  m_Layer: 5
+  m_Name: Monastery
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1427104243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427104242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1020884313}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1427104244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427104242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb4677efd118a54dbc0367596f95a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1492325665
 GameObject:
   m_ObjectHideFlags: 0

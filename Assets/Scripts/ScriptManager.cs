@@ -1,93 +1,120 @@
-﻿using System.Collections;
+ 
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.Events;
 
 public class ScriptManager : MonoBehaviour
-
 {
-
-
     public static ScriptManager i;
-    public TextAsset sourceText;
-    string[] words;
-    int wordIndex;
-    int letterIndex;
-    int lineIndex;
+    public UnityEvent OnWordCompleted;
+    public UnityEvent OnPageCompleted;
+    public UnityEvent OnBookCompleted;
+    float lettersLastFrame;
+    
+    Job prayers => JobManager.i.jobs[Profession.prayer].job;
+    Job writers => JobManager.i.jobs[Profession.writer].job;
+    Job paperMakers => JobManager.i.jobs[Profession.papermaker].job;
+    Job bookBinders => JobManager.i.jobs[Profession.bookbinder].job;
 
-    string curWord => words[wordIndex%words.Length];
-    TextMeshProUGUI curLine => lines[lineIndex];
+    [Header("floats")]
 
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] TextMeshProUGUI dropCap;
+    //replace this with resources
+    public float names;
+    public float letters;
+    public float words;
+    public float pages = 10;
+    public float pagesDone;
+    public float books;
 
-    [SerializeField] TextObject title;
+    [Header("ints")]
 
-    [SerializeField] List<TextMeshProUGUI> lines;
+    public int pagesWritten = 0;
+    public int booksWritten = 1;
+    public int wordsWritten;
 
-    public void WriteLetter(){
-
-        char letter = curWord[letterIndex];
-        
-        if(lineIndex == 0 && curLine.text == "" && letterIndex == 0){
-            dropCap.text = letter.ToString();
-        }else{
-            curLine.text += letter;
-        }
-
-        letterIndex ++;
-
-        if(letterIndex >= curWord.Length){
-
-            MonasteryManager.i.FinishWord();
-            
-            //finished word
-            wordIndex ++;
-
-            //trying to get rid of spaces?
-            while(curWord.Length <= 1 && curWord == " "){
-                wordIndex ++;
-            }
-
-            letterIndex = 0;
-            curLine.text += " ";
-
-            //check if next word fits on the line
-            
-            curLine.text += curWord + " ";
-            curLine.ForceMeshUpdate();
-
-            bool isOverflow = curLine.isTextOverflowing;
-
-
-             //now remove that shit
-            curLine.text = curLine.text.Remove(curLine.text.Length - (curWord.Length + 1));
-
-            if(isOverflow){
-                //delete the last word and start it on the next line
-                lineIndex++;
-
-                if(lineIndex >= lines.Count){
-                    //finished page
-                    //clear all lines
-                    MonasteryManager.i.FinishPage();
-                    ClearPage();
-                    lineIndex = 0;
-                }
-            }
-        }
-    }
-
-    public void ClearPage(){
-       foreach(TextMeshProUGUI t in lines){
-           t.text = "";
-       }
-       dropCap.text = "";
-    }
+    float lettersToWrite;
+    int pagesCompleted;
+    
 
     public void Awake(){
         i = this;
         
-        words = sourceText.text.Split (new char[] { ' ' });
     }
+
+    public void FinishPage(){
+        pages --;
+        letters = 0;
+        lettersLastFrame = 0;
+
+        OnPageCompleted.Invoke();
+        pagesWritten ++;
+        pagesDone++;
+    }
+
+    public void FinishBook(){
+        Debug.Log("finished book");
+
+        booksWritten ++;
+        books --;
+        OnBookCompleted.Invoke();
+        UIManager.i.UpdateBookCount(booksWritten);
+    }
+
+    public void FinishWord(){
+        names --;
+        wordsWritten ++;
+        OnWordCompleted.Invoke();
+    }
+
+    public void Pray(){
+
+    }
+
+    public void WriteLetter(){
+        lettersToWrite ++;
+    }
+    
+    public void Step(){
+
+        //calculate page production
+
+        pages += paperMakers.output; 
+
+        //calculate word delta
+        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, names));
+        int lettersWritten = 0;
+
+        if(names > 0 && pages > 0){
+            for(int i = 0; i < lettersCompleted; i++){
+                if(pages >= 1){
+                    //continue writing while we still have pages
+                    
+                    ScriptWriter.i.WriteLetter();
+                    lettersWritten ++;
+                    letters ++;
+                    lettersLastFrame = letters;
+                }
+            }
+
+            letters += writers.output % 1;
+        }
+
+        lettersToWrite = 0;
+        
+        //calculate bookbinding production
+        books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(pagesDone / Constants.PAGESPERBOOK));
+        int booksCompleted = (int) Mathf.Floor(books);
+        pagesDone -= booksCompleted * Constants.PAGESPERBOOK;
+        // do something visually with the amount of pages in the stack?
+
+        UIManager.i.currentPage.SetText(pagesDone.ToString());
+        UIManager.i.emptyPages.SetText(pages.ToString());
+        UIManager.i.names.SetText(Mathf.Floor(names).ToString());
+
+        UIManager.i.UpdateWordCount(wordsWritten);
+        UIManager.i.UpdatePageCount(pagesWritten);
+        //  UIManager.i.UpdatePrayerCount((int)Mathf.Floor(theism));
+    }
+    
 }

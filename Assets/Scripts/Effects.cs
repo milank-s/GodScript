@@ -6,11 +6,14 @@ public class Effects : MonoBehaviour
 {
     public static IEnumerator Type(float time, TextMeshProUGUI t, string text){
 
+        t.text = "";
+        
         for(int i = 0; i < text.Length; i++){
            t.text += text[i];
             yield return new WaitForSeconds(Random.Range(0.1f, 0.15f));
         }
     }
+
     public static IEnumerator FadeIn(float time, SpriteRenderer s){
         float t = 0;
         while(t < 1){

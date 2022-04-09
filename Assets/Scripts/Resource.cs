@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Resource
 {
+    public delegate void NewValueEvent(float a);
+    public ResourceType resourceType;
     public float amount;
 
-    public UnityEvent OnWholeNumberChanged;
+    public NewValueEvent OnWholeNumberChanged;
 
     public void Increment(){
-        amount++;
-        OnWholeNumberChanged.Invoke();
+        if(OnWholeNumberChanged != null){
+            OnWholeNumberChanged.Invoke(amount);
+        }
     }
 
-    public void ChangeValue(float diff){
-
+    public void AddOutput(float diff){
+       
+        float prevAmount = Mathf.Floor(amount);
+        float newAmount = prevAmount + diff;
+        if(Mathf.Floor(amount) > prevAmount){
+            Increment();
+        }
     }
 }

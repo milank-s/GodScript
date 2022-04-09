@@ -6,40 +6,32 @@ public enum Profession {prayer, writer, papermaker, bookbinder}
 
 public class Job
     {
+
+    public ResourceType resourceProduced;
+    public Resource resource;
+    public float productivity = 1;
     public Profession jobType;
     public List<Monk> employees;
     public float output;
-    public float productivity = 1;
 
     public void Setup(){
-        switch(jobType){
-            case Profession.prayer:
-                productivity = Constants.PRAYER_PRODUCTIVITY;
-            break;
-
-            case Profession.writer:
-                productivity = Constants.WRITER_PRODUCTIVITY;
-            break;
-
-            case Profession.papermaker:
-                productivity = Constants.PAPERMAKER_PRODUCTIVITY;
-            break;
-
-            case Profession.bookbinder:
-                productivity = Constants.BOOKBINDER_PRODUCTIVITY;
-            break;
-        }
+        
     }
+
     public Monk PopMonk(){
         Monk m = employees[employees.Count -1];
+        employees.Remove(m);
         return m;
     }
+
     public Job(Profession p){
         employees = new List<Monk>();
         jobType = p;
+        resource = Resources.GetResource(resourceProduced);
         Setup();
     }
 
+    
     public void AddMonk(Monk m){
         employees.Add(m);
         m.job = jobType;
@@ -47,38 +39,36 @@ public class Job
     public virtual void CalculateOutput(){
         output = productivity * employees.Count * Time.deltaTime;
     }
+
+    public void Tick(){
+        CalculateOutput();
+        resource.AddOutput(output);
+    }
     
 }
 
-public class Jobsite : Unlock
+public class Jobsite : MonoBehaviour
 {
 
     public Profession jobType;
     public Job job;
     public Counter employeeCounter;
-    public Resource buildings;
-
 
     public void Awake(){
         job = new Job(jobType);
-        MonasteryManager.i.jobs.Add(jobType, this);
-    }
-
-    public override void Start(){
-        base.Start();
+        JobManager.i.jobs.Add(jobType, this);
     }
 
     public void Update(){
-        job.CalculateOutput();
+        job.Tick();
     }
 
     public void TryAssignWorker(int i){
         
         if(i > 0){
 
-            if(MonasteryManager.i.prayers.employees.Count > 0){
-                Monk m = MonasteryManager.i.prayers.PopMonk();
-                MonasteryManager.i.jobs[Profession.prayer].RemoveMonk(m);
+            if(JobManager.i.prayers.employees.Count > 0){
+                Monk m = JobManager.i.prayers.PopMonk();
                 AddMonk(m);
                 UIManager.i.AddToFeed(m.name + " became a " + m.job);
             }
@@ -86,7 +76,7 @@ public class Jobsite : Unlock
             if(job.employees.Count > 0){
                 
                 Monk m = job.PopMonk();
-                MonasteryManager.i.jobs[Profession.prayer].AddMonk(m);
+                JobManager.i.jobs[Profession.prayer].AddMonk(m);
                 RemoveMonk(m);
             }
         }        
