@@ -12,6 +12,8 @@ public class ScriptManager : MonoBehaviour
     public UnityEvent OnBookCompleted;
     float lettersLastFrame;
     
+    Queue<string> wordQueue;
+
     Job prayers => JobManager.i.jobs[Profession.prayer].job;
     Job writers => JobManager.i.jobs[Profession.writer].job;
     Job paperMakers => JobManager.i.jobs[Profession.papermaker].job;
@@ -20,10 +22,8 @@ public class ScriptManager : MonoBehaviour
     [Header("floats")]
 
     //replace this with resources
-    public float names;
     public float letters;
     public float words;
-    public float pages = 10;
     public float pagesDone;
     public float books;
 
@@ -39,7 +39,7 @@ public class ScriptManager : MonoBehaviour
     }
 
     public void FinishPage(){
-        pages --;
+        
         letters = 0;
         lettersLastFrame = 0;
 
@@ -67,12 +67,12 @@ public class ScriptManager : MonoBehaviour
     public void Step(){
  
         //calculate word delta
-        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, names));
+        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, Resources.names.amount));
         int lettersWritten = 0;
 
-        if(names > 0 && pages > 0){
+        if(Resources.names.amount > 0 && Resources.pages.amount > 0){
             for(int i = 0; i < lettersCompleted; i++){
-                if(pages >= 1){
+                if(Resources.pages.amount >= 1){
                     //continue writing while we still have pages
                     
                     ScriptWriter.i.WriteLetter();

@@ -13,6 +13,7 @@ public class ScriptWriter : MonoBehaviour
     int lineIndex;
 
     string curWord => words[wordIndex%words.Length];
+
     TextMeshProUGUI curLine => lines[lineIndex];
 
     [SerializeField] TextMeshProUGUI text;

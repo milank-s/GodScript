@@ -5,7 +5,7 @@ using static CoroutineExtensions;
 
 public class Sequence : MonoBehaviour
 {
-    bool skipped;
+    protected bool skipped;
     CoroutineController routine;
     public virtual IEnumerator SequenceBody(){
         
