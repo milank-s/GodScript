@@ -141,9 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Page
-
-'
+  m_text: Resource
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51ea06332f25ee34db96702e5d05b64c, type: 2}
   m_sharedMaterial: {fileID: 5204426854252643878, guid: 51ea06332f25ee34db96702e5d05b64c,
