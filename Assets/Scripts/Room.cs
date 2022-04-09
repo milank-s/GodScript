@@ -11,7 +11,7 @@ public class Room : MonoBehaviour
     public Rooms roomType;
     public Transform visualRoot;
 
-    public virtual void Start(){
+    public virtual void Awake(){
         Main.manager.SetupUnlock(this);
     }
 

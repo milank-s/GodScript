@@ -7,7 +7,7 @@ public class PrayerSequence : Sequence
     
     public override IEnumerator SequenceBody(){
 
-        Main.manager.OpenRoom(Rooms.STUDIES);
+        Main.manager.UnlockRoom(Rooms.STUDIES);
 
         yield return null;
     }

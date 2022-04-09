@@ -9,11 +9,20 @@ public class GameManager : MonoBehaviour
     public enum Stage{intro}
 
     public bool running = false;
-
-    public Dictionary<Rooms, Room> rooms;
     public Stage stage;
+    
+    Dictionary<Rooms, Room> rooms;
+    
     public void Awake(){
         i = this;
+        rooms = new Dictionary<Rooms, Room>();
+        
+        if(PlayerPrefs.HasKey("stage")){
+            stage = (Stage)PlayerPrefs.GetInt("stage");
+        }else{
+            stage = Stage.intro;
+            PlayerPrefs.SetInt("stage", (int)Stage.intro);
+        }
     }
 
     [Header("Sequences")]
