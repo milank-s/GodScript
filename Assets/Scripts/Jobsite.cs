@@ -7,6 +7,8 @@ public enum Profession {prayer, writer, papermaker, bookbinder}
 public class Job
     {
 
+    public delegate void Event();
+    public Event OnHireMonk;
     public ResourceType resourceProduced;
     public Resource resource;
     public float productivity = 1;
@@ -20,7 +22,8 @@ public class Job
 
     public Monk PopMonk(){
         Monk m = employees[employees.Count -1];
-        employees.Remove(m);
+        RemoveMonk(m);
+
         return m;
     }
 
@@ -31,9 +34,19 @@ public class Job
         Setup();
     }
 
+    public void RemoveMonk(Monk m){
+        employees.Remove(m);
+        if(OnHireMonk != null){
+            OnHireMonk.Invoke();
+        }
+    }
     public void AddMonk(Monk m){
         employees.Add(m);
         m.job = jobType;
+
+        if(OnHireMonk != null){
+            OnHireMonk.Invoke();
+        }
     }
     public virtual void CalculateOutput(){
         output = productivity * employees.Count * Time.deltaTime;
@@ -56,6 +69,7 @@ public class Jobsite : MonoBehaviour
     public void Awake(){
         job = new Job(jobType);
         JobManager.i.jobs.Add(jobType, this);
+        job.OnHireMonk += ChangeEmployeeCount;
     }
 
     public void Update(){
@@ -68,25 +82,19 @@ public class Jobsite : MonoBehaviour
 
             if(JobManager.i.prayers.employees.Count > 0){
                 Monk m = JobManager.i.prayers.PopMonk();
-                AddMonk(m);
+                job.AddMonk(m);
                 UIManager.i.AddToFeed(m.name + " became a " + m.job);
             }
         }else{
             if(job.employees.Count > 0){
                 
                 Monk m = job.PopMonk();
-                JobManager.i.jobs[Profession.prayer].AddMonk(m);
-                RemoveMonk(m);
+                JobManager.i.jobs[Profession.prayer].job.AddMonk(m);
             }
-        }        
+        }    
     }
 
-    public void AddMonk(Monk m){
-        job.AddMonk(m);
-        employeeCounter.SetText(job.employees.Count.ToString());
-    }
-    public void RemoveMonk(Monk m){
-        job.employees.Remove(m);
+    public void ChangeEmployeeCount(){
         employeeCounter.SetText(job.employees.Count.ToString());
     }
 }

@@ -34,7 +34,7 @@ public class MonkManager
 
     public void RemoveMonk(Monk m){
         monks.Remove(m);
-        JobManager.i.jobs[m.job].RemoveMonk(m);
+        JobManager.i.jobs[m.job].job.RemoveMonk(m);
     }
 
     public void Step()

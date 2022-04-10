@@ -20,7 +20,7 @@ public class JobManager
     }
 
     public void AssignJob(Monk m, Profession p){
-        jobs[p].AddMonk(m);
+        jobs[p].job.AddMonk(m);
     }
 
 }

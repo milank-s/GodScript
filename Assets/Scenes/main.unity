@@ -538,7 +538,7 @@ MonoBehaviour:
   text: {fileID: 1869028202}
   currentLine: {fileID: 2096015794}
   typing: 0
-  speed: 0.2
+  speed: 0
 --- !u!222 &105057930
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2931,10 +2931,8 @@ MonoBehaviour:
   OnBookCompleted:
     m_PersistentCalls:
       m_Calls: []
-  names: 0
   letters: 0
   words: 0
-  pages: 1
   pagesDone: 1
   books: 0
 --- !u!1001 &881788376

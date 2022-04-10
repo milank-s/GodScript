@@ -11,4 +11,8 @@ public class ResourceCounter : Counter
         r = Resources.GetResource(resourceType);
         r.OnWholeNumberChanged += SetAmount;
     }
+
+    public void SetResourceAmount(){
+        SetAmount((int)r.amount);
+    }
 }

@@ -12,7 +12,8 @@ public class ScriptWriter : MonoBehaviour
     int letterIndex;
     int lineIndex;
 
-    string curWord => words[wordIndex%words.Length];
+    Queue<string> wordQueue;
+    string curWord => wordQueue.Peek();
 
     TextMeshProUGUI curLine => lines[lineIndex];
 
@@ -20,6 +21,11 @@ public class ScriptWriter : MonoBehaviour
     [SerializeField] TextMeshProUGUI dropCap;
     [SerializeField] TextObject title;
     [SerializeField] List<TextMeshProUGUI> lines;
+
+    public void Awake(){
+        i = this;    
+        words = sourceText.text.Split (new char[] { ' ' });
+    }
 
     public void WriteLetter(){
 
@@ -36,7 +42,7 @@ public class ScriptWriter : MonoBehaviour
         if(letterIndex >= curWord.Length){
 
             ScriptManager.i.FinishWord();
-            
+            wordQueue.Dequeue();
             //finished word
             wordIndex ++;
 
@@ -54,7 +60,6 @@ public class ScriptWriter : MonoBehaviour
             curLine.ForceMeshUpdate();
 
             bool isOverflow = curLine.isTextOverflowing;
-
 
              //now remove that shit
             curLine.text = curLine.text.Remove(curLine.text.Length - (curWord.Length + 1));
@@ -79,11 +84,5 @@ public class ScriptWriter : MonoBehaviour
            t.text = "";
        }
        dropCap.text = "";
-    }
-
-    public void Awake(){
-        i = this;
-        
-        words = sourceText.text.Split (new char[] { ' ' });
     }
 }

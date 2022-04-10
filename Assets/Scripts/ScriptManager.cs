@@ -29,7 +29,6 @@ public class ScriptManager : MonoBehaviour
 
     [Header("ints")]
 
-    float lettersToWrite;
     int pagesCompleted;
     
 
@@ -55,6 +54,7 @@ public class ScriptManager : MonoBehaviour
         OnBookCompleted.Invoke();
         Resources.Increment(ResourceType.booksDone);
         Resources.Decrement(ResourceType.books);
+        Resources.GetResource(ResourceType.pagesWritten).AddOutput(Constants.PAGESPERBOOK);
     }
 
     public void FinishWord(){
@@ -64,36 +64,51 @@ public class ScriptManager : MonoBehaviour
         OnWordCompleted.Invoke();
     }
 
-    public void Step(){
- 
-        //calculate word delta
-        int lettersCompleted = (int)Mathf.Floor(Mathf.Clamp(letters + lettersToWrite + writers.output - lettersLastFrame, 0, Resources.names.amount));
-        int lettersWritten = 0;
-
+    public void WriterOutput(int delta){
         if(Resources.names.amount > 0 && Resources.pages.amount > 0){
-            for(int i = 0; i < lettersCompleted; i++){
+            for(int i = 0; i < delta; i++){
                 if(Resources.pages.amount >= 1){
                     //continue writing while we still have pages
                     
                     ScriptWriter.i.WriteLetter();
-                    lettersWritten ++;
-                    letters ++;
-                    lettersLastFrame = letters;
                 }
             }
-
-            letters += writers.output % 1;
         }
+    }
 
-        lettersToWrite = 0;
-        
-        //calculate bookbinding production
-        books += Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(Resources.GetResource(ResourceType.pagesWritten).amount / Constants.PAGESPERBOOK));
-        int booksCompleted = (int) Mathf.Floor(books);
-        
-        Resources.GetResource(ResourceType.pagesWritten).AddOutput(-booksCompleted * Constants.PAGESPERBOOK);
-        
+    public void BindBooks(){
 
+        //output doesnt accumulate as a resource
+        //how to calculate bookbinders working over time?
+        int booksCompleted = (int) Mathf.Floor(Mathf.Clamp(bookBinders.output, 0, Mathf.Floor(Resources.GetResource(ResourceType.pagesWritten).amount / Constants.PAGESPERBOOK)));
+
+        for(int i = 0; i < booksCompleted; i++){
+            FinishBook();
+        }
+    }
+
+    public void Step(){
+ 
+        //calculate word delta
+        // int writerOutput = (int)Mathf.Floor(Mathf.Clamp(letters + writers.output - lettersLastFrame, 0, Resources.names.amount));
+        // int lettersWritten = 0;
+
+        // if(Resources.names.amount > 0 && Resources.pages.amount > 0){
+        //     for(int i = 0; i < writerOutput; i++){
+        //         if(Resources.pages.amount >= 1){
+        //             //continue writing while we still have pages
+                    
+        //             ScriptWriter.i.WriteLetter();
+        //             lettersWritten ++;
+        //             letters ++;
+        //             lettersLastFrame = letters;
+        //         }
+        //     }
+
+            
+        //     letters += writers.output % 1;
+        // }
+        
         //  UIManager.i.UpdatePrayerCount((int)Mathf.Floor(theism));
     }
     

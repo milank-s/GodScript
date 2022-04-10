@@ -20,6 +20,7 @@ public class StartSequence : Sequence
 
 
         //these should be written to the script. 
+        
         UIManager.i.AddToFeed("Writing in the study late one night");
         UIManager.i.AddToFeed("a monk looked out to see a new star");
         UIManager.i.AddToFeed("and began to compose new praise of God");

@@ -9,6 +9,7 @@ public class Resource
     public float amount;
     float prevAmount;
     public NewValueEvent OnWholeNumberChanged;
+    public NewValueEvent OnWholeNumberDelta;
 
     public Resource(ResourceType r){
         resourceType = r;
@@ -23,11 +24,15 @@ public class Resource
         if(OnWholeNumberChanged != null){
             OnWholeNumberChanged.Invoke((int)amount);
         }
+
+        if(OnWholeNumberDelta != null){
+            OnWholeNumberDelta.Invoke((int)(amount - prevAmount));
+        }
     }
 
     public void Tick(){
-        
-        if(Mathf.Floor(amount) > prevAmount){
+
+        if(Mathf.Floor(amount) != prevAmount){
             UpdateValue();
         }
 
