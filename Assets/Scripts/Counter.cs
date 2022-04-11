@@ -6,9 +6,6 @@ public class Counter : TextObject
 {
     public TextObject title;
     
-    public override void Start(){
-        base.Start();
-    }
     public override IEnumerator Reveal(float time = 1){
         
         yield return StartCoroutine(title.Reveal(1));

@@ -9,7 +9,6 @@ public class Job
 
     public delegate void Event();
     public Event OnHireMonk;
-    public ResourceType resourceProduced;
     public Resource resource;
     public float productivity = 1;
     public Profession jobType;
@@ -27,15 +26,16 @@ public class Job
         return m;
     }
 
-    public Job(Profession p){
+    public Job(Profession p, ResourceType r){
         employees = new List<Monk>();
         jobType = p;
-        resource = Resources.GetResource(resourceProduced);
+        resource = Resources.GetResource(r);
         Setup();
     }
 
     public void RemoveMonk(Monk m){
         employees.Remove(m);
+
         if(OnHireMonk != null){
             OnHireMonk.Invoke();
         }
@@ -52,7 +52,7 @@ public class Job
         output = productivity * employees.Count * Time.deltaTime;
     }
 
-    public void Tick(){
+    public void Step(){
         CalculateOutput();
         resource.AddOutput(output);
     }
@@ -63,17 +63,18 @@ public class Jobsite : MonoBehaviour
 {
 
     public Profession jobType;
+    public ResourceType resourceProduced;
     public Job job;
     public Counter employeeCounter;
 
     public void Awake(){
-        job = new Job(jobType);
+        job = new Job(jobType, resourceProduced);
         JobManager.i.jobs.Add(jobType, this);
         job.OnHireMonk += ChangeEmployeeCount;
     }
 
     public void Update(){
-        job.Tick();
+        job.Step();
     }
 
     public void TryAssignWorker(int i){

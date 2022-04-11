@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
             UIManager.i.year.SetText(year.ToString("F0") + " AD");
             Main.monks.Step();
             ScriptManager.i.Step();
+            Main.resources.Step();
         }
     }
 

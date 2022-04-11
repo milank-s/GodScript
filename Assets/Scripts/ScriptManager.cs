@@ -34,7 +34,10 @@ public class ScriptManager : MonoBehaviour
 
     public void Awake(){
         i = this;
-        
+    }
+
+    void Start(){
+        Resources.writers.OnWholeNumberDelta += WriterOutput;
     }
 
     public void FinishPage(){
@@ -65,15 +68,18 @@ public class ScriptManager : MonoBehaviour
     }
 
     public void WriterOutput(int delta){
+
         if(Resources.names.amount > 0 && Resources.pages.amount > 0){
             for(int i = 0; i < delta; i++){
                 if(Resources.pages.amount >= 1){
                     //continue writing while we still have pages
                     
+                    Debug.Log("write letter");
                     ScriptWriter.i.WriteLetter();
                 }
             }
         }
+
     }
 
     public void BindBooks(){
@@ -89,6 +95,8 @@ public class ScriptManager : MonoBehaviour
 
     public void Step(){
  
+        BindBooks();
+
         //calculate word delta
         // int writerOutput = (int)Mathf.Floor(Mathf.Clamp(letters + writers.output - lettersLastFrame, 0, Resources.names.amount));
         // int lettersWritten = 0;

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237407659a45e0842be40ca287e12fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 0
+  visible: 1
   text: {fileID: 6611001888825889885}
   title: {fileID: 3681565220009408494}
   resourceType: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff28b6d5531a4b4a8f78628a724f03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 0
+  visible: 1
   text: {fileID: 6874171940081627057}
 --- !u!114 &6874171940081627057
 MonoBehaviour:

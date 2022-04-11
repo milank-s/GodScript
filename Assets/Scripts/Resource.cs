@@ -7,6 +7,7 @@ public class Resource
     public delegate void NewValueEvent(int a);
     public ResourceType resourceType;
     public float amount;
+    float delta;
     float prevAmount;
     public NewValueEvent OnWholeNumberChanged;
     public NewValueEvent OnWholeNumberDelta;
@@ -21,18 +22,22 @@ public class Resource
     }
 
     public void UpdateValue(){
+        
+        delta = Mathf.Floor(amount) - Mathf.Floor(prevAmount);
+
         if(OnWholeNumberChanged != null){
             OnWholeNumberChanged.Invoke((int)amount);
         }
 
         if(OnWholeNumberDelta != null){
-            OnWholeNumberDelta.Invoke((int)(amount - prevAmount));
+            Debug.Log(delta);
+            OnWholeNumberDelta.Invoke((int)delta);
         }
     }
 
-    public void Tick(){
+    public void Step(){
 
-        if(Mathf.Floor(amount) != prevAmount){
+        if(Mathf.Floor(amount) != Mathf.Floor(prevAmount)){
             UpdateValue();
         }
 

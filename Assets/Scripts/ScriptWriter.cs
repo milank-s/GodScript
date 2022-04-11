@@ -13,8 +13,9 @@ public class ScriptWriter : MonoBehaviour
     int lineIndex;
 
     Queue<string> wordQueue;
-    string curWord => wordQueue.Peek();
+    //string curWord => wordQueue.Peek();
 
+    string curWord => words[wordIndex % words.Length];
     TextMeshProUGUI curLine => lines[lineIndex];
 
     [SerializeField] TextMeshProUGUI text;
@@ -25,9 +26,12 @@ public class ScriptWriter : MonoBehaviour
     public void Awake(){
         i = this;    
         words = sourceText.text.Split (new char[] { ' ' });
+        wordQueue = new Queue<string>();
     }
 
     public void WriteLetter(){
+
+        Resources.Decrement(ResourceType.writers);
 
         char letter = curWord[letterIndex];
         
@@ -42,7 +46,9 @@ public class ScriptWriter : MonoBehaviour
         if(letterIndex >= curWord.Length){
 
             ScriptManager.i.FinishWord();
-            wordQueue.Dequeue();
+            
+            //wordQueue.Dequeue();
+            
             //finished word
             wordIndex ++;
 

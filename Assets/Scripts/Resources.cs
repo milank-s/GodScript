@@ -10,7 +10,8 @@ public enum ResourceType{
     pagesDone = 3,
     wordsDone = 4,
     booksDone = 5,
-    pagesWritten
+    pagesWritten = 6, 
+    writers = 7
 }
 
 public class Resources
@@ -18,6 +19,7 @@ public class Resources
     public static Dictionary<ResourceType, Resource> resourceRefs;
     
     public static Resource names;
+    public static Resource writers;
     public static Resource pages;
     public static Resource books;
     public Resources(){
@@ -29,6 +31,16 @@ public class Resources
             resourceRefs.Add(r.resourceType, r);
 
             SetResourceRef(r, (ResourceType)i);
+        }
+    }
+
+      public void Step(){
+        foreach(int i in System.Enum.GetValues(typeof(ResourceType))){
+            
+            Resource r;
+            if(resourceRefs.TryGetValue((ResourceType) i, out r)){
+                r.Step();
+            }
         }
     }
 
@@ -48,10 +60,6 @@ public class Resources
         }
     }
 
-    public static void Set(){
-
-    }
-
     void SetResourceRef(Resource r, ResourceType i){
         switch(i){
             case ResourceType.names:
@@ -65,6 +73,10 @@ public class Resources
             case ResourceType.books:
             books = r;
             break;
+            
+            case ResourceType.writers:
+            writers = r;
+            break;
         }
     }
 
@@ -77,15 +89,5 @@ public class Resources
         }
 
         return null;
-    }
-
-    public void UpdateResourceAmounts(){
-        foreach(int i in System.Enum.GetValues(typeof(ResourceType))){
-            
-            Resource r;
-            if(resourceRefs.TryGetValue((ResourceType) i, out r)){
-                r.Tick();
-            }
-        }
     }
 }
