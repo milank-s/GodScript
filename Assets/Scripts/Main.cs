@@ -26,9 +26,14 @@ public class Main : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.R)){
+            
+            Debug.Log("deleted save");
             PlayerPrefs.DeleteAll();
         }
-        manager.Step();
+
+        if(manager.running){
+            manager.Step();
+        }
     }
 
     public void OnQuitApplication(){
@@ -36,9 +41,11 @@ public class Main : MonoBehaviour
     }
 
     public void Save(){
-        Debug.Log("saved");
-        
+        Debug.Log("saved game");
+
         resources.Save();
         jobs.Save();
+
+        PlayerPrefs.Save();
     }
 }

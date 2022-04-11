@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Initialize(){
+        
         if(PlayerPrefs.HasKey("stage")){
             stage = (Stage)PlayerPrefs.GetInt("stage");
         }else{
