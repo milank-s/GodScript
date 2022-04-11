@@ -16,7 +16,8 @@ public class Resource
         resourceType = r;
         if(PlayerPrefs.HasKey(r.ToString())){
             amount = PlayerPrefs.GetFloat(r.ToString());
-        }else{
+            Debug.Log(amount);
+        }else{            
             PlayerPrefs.SetFloat(r.ToString(), amount);
         }
     }
@@ -30,7 +31,6 @@ public class Resource
         }
 
         if(OnWholeNumberDelta != null){
-            Debug.Log(delta);
             OnWholeNumberDelta.Invoke((int)delta);
         }
     }

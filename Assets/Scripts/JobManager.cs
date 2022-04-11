@@ -23,4 +23,15 @@ public class JobManager
         jobs[p].job.AddMonk(m);
     }
 
+    public void Save(){
+        foreach(int i in System.Enum.GetValues(typeof(Profession))){
+            
+            Jobsite j;
+
+            if(jobs.TryGetValue((Profession) i, out j)){
+                PlayerPrefs.SetFloat(j.ToString() + "s", j.job.employees.Count);
+            
+            }
+        }
+    }
 }

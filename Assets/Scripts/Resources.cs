@@ -44,6 +44,16 @@ public class Resources
         }
     }
 
+    public void Save(){
+        foreach(int i in System.Enum.GetValues(typeof(ResourceType))){
+            
+            Resource r;
+            if(resourceRefs.TryGetValue((ResourceType) i, out r)){
+                PlayerPrefs.SetFloat(r.ToString(), r.amount);
+            }
+        }
+    }
+
     public static void Increment(ResourceType resourceType){
         Resource r;
 

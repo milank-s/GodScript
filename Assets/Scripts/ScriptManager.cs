@@ -74,7 +74,6 @@ public class ScriptManager : MonoBehaviour
                 if(Resources.pages.amount >= 1){
                     //continue writing while we still have pages
                     
-                    Debug.Log("write letter");
                     ScriptWriter.i.WriteLetter();
                 }
             }

@@ -20,6 +20,25 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.S)){
+            Save();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R)){
+            PlayerPrefs.DeleteAll();
+        }
         manager.Step();
+    }
+
+    public void OnQuitApplication(){
+        Save();
+    }
+
+    public void Save(){
+        Debug.Log("saved");
+        
+        resources.Save();
+        jobs.Save();
     }
 }

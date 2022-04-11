@@ -31,6 +31,10 @@ public class ScriptWriter : MonoBehaviour
 
     public void WriteLetter(){
 
+        if(wordIndex >= words.Length){
+            return;
+        }
+        
         Resources.Decrement(ResourceType.writers);
 
         char letter = curWord[letterIndex];
