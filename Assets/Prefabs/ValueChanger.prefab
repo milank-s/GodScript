@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5616833881741993915}
   - component: {fileID: 1764121524522266745}
   - component: {fileID: 413376755900491214}
+  - component: {fileID: 2900653426403869428}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -133,6 +134,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2900653426403869428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683807383123042111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff28b6d5531a4b4a8f78628a724f03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  text: {fileID: 413376755900491214}
 --- !u!1 &3592657677230320614
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +238,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: TryAddWorker
+        m_MethodName: TryAssignWorker
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -352,7 +367,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: TryAddWorker
+        m_MethodName: TryAssignWorker
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -549,7 +564,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048568292314400278}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -585,4 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661dbbc5be072454c947c95e479e574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visible: 0
   text: {fileID: 7801607129881719209}
+  title: {fileID: 2900653426403869428}

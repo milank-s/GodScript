@@ -49,10 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276859d6d71bcd146ba3ebd41c575240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
-  unlock: 0
-  visualRoot: {fileID: 1181635798807502156}
   jobType: 0
+  resourceProduced: 0
   employeeCounter: {fileID: 474867800189527277}
 --- !u!1001 &8194168662126828377
 PrefabInstance:
@@ -66,21 +64,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7873426542175134399}
-    - target: {fileID: 1318695479442116055, guid: 8fb800113ca2c8241949e7466be18f67,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TryAssignWorker
-      objectReference: {fileID: 0}
     - target: {fileID: 4179748267646278525, guid: 8fb800113ca2c8241949e7466be18f67,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7873426542175134399}
-    - target: {fileID: 4179748267646278525, guid: 8fb800113ca2c8241949e7466be18f67,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TryAssignWorker
-      objectReference: {fileID: 0}
     - target: {fileID: 7048568292314400277, guid: 8fb800113ca2c8241949e7466be18f67,
         type: 3}
       propertyPath: m_Pivot.x
@@ -191,13 +179,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: ValueChanger
       objectReference: {fileID: 0}
-    - target: {fileID: 8584029408684441524, guid: 8fb800113ca2c8241949e7466be18f67,
-        type: 3}
-      propertyPath: visualRoot
-      value: 
-      objectReference: {fileID: 2128672317488741901}
-    m_RemovedComponents:
-    - {fileID: 4101385328033534202, guid: 8fb800113ca2c8241949e7466be18f67, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fb800113ca2c8241949e7466be18f67, type: 3}
 --- !u!224 &1181635798807502156 stripped
 RectTransform:
@@ -217,9 +199,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661dbbc5be072454c947c95e479e574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2128672317488741901 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7799417385549210964, guid: 8fb800113ca2c8241949e7466be18f67,
-    type: 3}
-  m_PrefabInstance: {fileID: 8194168662126828377}
-  m_PrefabAsset: {fileID: 0}

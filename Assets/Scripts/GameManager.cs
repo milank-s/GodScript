@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager i;
     public float year = 1000;
-    public enum Stage{intro}
+    public enum Stage{intro, study, writing, bookmaking, funding, resources, building}
 
     public bool running = false;
 

@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 7791378736523790617}
   - component: {fileID: 6725266858476419290}
   m_Layer: 0
-  m_Name: Title
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +194,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff28b6d5531a4b4a8f78628a724f03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 1
-  visualRoot: {fileID: 9024604172956336028}
+  visible: 0
   text: {fileID: 2813498473073535894}
