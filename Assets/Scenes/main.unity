@@ -1291,11 +1291,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 337755367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f309fe9dd8b852d4093ff4b8bfa00308, type: 3}
+  m_Script: {fileID: 11500000, guid: e1d3b67234c2e444b9e2293086300c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sourceText: {fileID: 4900000, guid: b0ec8cddc75d51447b90e7e109e72a82, type: 3}
-  text: {fileID: 1501249137}
+  text: {fileID: 0}
   dropCap: {fileID: 754729762}
   title: {fileID: 7791378737870794220}
   lines:
@@ -3490,7 +3490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.499996, y: -275}
+  m_AnchoredPosition: {x: -12.5, y: -275}
   m_SizeDelta: {x: -25, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1125227559

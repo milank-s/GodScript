@@ -18,7 +18,7 @@ public class ScriptWriter : MonoBehaviour
     string curWord => words[wordIndex % words.Length];
     TextMeshProUGUI curLine => lines[lineIndex];
 
-    [SerializeField] TextMeshProUGUI text;
+    // [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI dropCap;
     [SerializeField] TextObject title;
     [SerializeField] List<TextMeshProUGUI> lines;
