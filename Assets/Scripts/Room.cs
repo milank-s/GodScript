@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
 
     public virtual IEnumerator Reveal(){
         foreach(UIObject o in visualRoot.GetComponentsInChildren<UIObject>()){
-            yield return StartCoroutine(o.Reveal(0.5f));
+            yield return StartCoroutine(o.Reveal(1f));
         }
 
         foreach(UIObject o in ui){

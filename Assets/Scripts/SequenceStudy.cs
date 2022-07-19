@@ -9,6 +9,7 @@ public class SequenceStudy : Sequence
 
     public override IEnumerator SequenceBody(){
 
+        yield return new WaitForSeconds(1);
         Main.manager.UnlockRoom(Rooms.STUDIES);
 
         Debug.Log("study sequence");

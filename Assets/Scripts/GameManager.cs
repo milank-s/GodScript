@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
 
         foreach(Sequence s in sequences){
             yield return StartCoroutine(s.PlaySequence());
+            yield return null;
         }
 
         running = true;
