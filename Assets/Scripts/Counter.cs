@@ -18,8 +18,4 @@ public class Counter : TextObject
         base.Start();  
     }
 
-    public override void SetText(string t){
-        float amount = float.Parse(t);
-        text.text = amount.ToString("F0");
-    }
 }

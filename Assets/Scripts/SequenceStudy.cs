@@ -11,11 +11,13 @@ public class SequenceStudy : Sequence
 
         Main.manager.UnlockRoom(Rooms.STUDIES);
 
+        Debug.Log("study sequence");
+        
         prayerButton.SetActive(true);
 
         if(Main.monks.monks.Count == 0){
            Monk m = Main.monks.CreateMonk();
-            JobManager.i.AssignJob(m, Profession.writer);
+            JobManager.i.jobs[Profession.writer].TryAssignWorker(1);
         }
 
         yield return null;

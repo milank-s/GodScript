@@ -78,7 +78,6 @@ public class Jobsite : UIObject
         job = new Job(jobType, resourceProduced);
         JobManager.i.jobs.Add(jobType, this);
         job.OnHireMonk += ChangeEmployeeCount;
-        employeeCounter.SetAmount(job.employees.Count);
     }
 
     public override IEnumerator Reveal(float time = 1){
@@ -126,6 +125,6 @@ public class Jobsite : UIObject
     }
 
     public void ChangeEmployeeCount(){
-        employeeCounter.SetText(job.employees.Count.ToString());
+        employeeCounter.SetAmount(job.employees.Count);
     }
 }

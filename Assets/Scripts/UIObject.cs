@@ -10,7 +10,7 @@ public class UIObject : MonoBehaviour
        Show(visible);
    }
    public virtual void Show(bool b){
-       
+       visible = b;
    }
    
    public virtual void FadeIn(){

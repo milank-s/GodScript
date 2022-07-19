@@ -7,7 +7,7 @@ public class TextObject : UIObject
 {
     
     public TextMeshProUGUI text;
-    string textCached;
+    protected string textCached;
     public override void Start()
     {
         textCached = text.text;
@@ -18,17 +18,25 @@ public class TextObject : UIObject
     public override void Show(bool b)
     {
         base.Show(b);
+
         if(!b){
             text.text = "";
         }
     }
     public virtual void SetText(string t){
-        text.text = t;
-        textCached = t;
+        if(visible){
+            text.text = t;
+        }else{
+            textCached = t;
+        }
     }
 
     public virtual void SetAmount(int i){
-        text.text = i.ToString();
+        if(visible){
+            text.text = i.ToString();
+        }else{
+            textCached = i.ToString();  
+        }
     }
 
     public override IEnumerator Reveal(float time = 1)
