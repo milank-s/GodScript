@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     public void Pray(){
         Resources.names.Increment();
-        UIManager.i.AddToFeed("yes");
     }
 
     public void AddMonk(){

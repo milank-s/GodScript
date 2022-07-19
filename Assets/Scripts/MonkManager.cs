@@ -59,7 +59,10 @@ public class Monk{
     public string name;
     public float lifeSpan;
     public static string[] names = {"Joseph", "Thomas", "Quine", "Nathanial", "Isaac", "Frank", "Isaiah", "Samuel"};
+
+    public enum Hierarchy{laity, clergy}
     public Profession job;
+    public Hierarchy rank;
     public Monk(){
         lifeSpan = Random.Range(250, 350);
         job = Profession.prayer;

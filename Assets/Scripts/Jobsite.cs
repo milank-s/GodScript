@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Profession {prayer, writer, papermaker, bookbinder}
+public enum Profession {prayer, writer, papermaker, bookbinder, layclergy}
 
 public class Job
     {
@@ -53,6 +53,8 @@ public class Job
     }
 
     public void Step(){
+        if(resource.resourceType < 0) return;
+        
         CalculateOutput();
         resource.AddOutput(output);
     }
@@ -90,7 +92,11 @@ public class Jobsite : MonoBehaviour
             if(job.employees.Count > 0){
                 
                 Monk m = job.PopMonk();
-                JobManager.i.jobs[Profession.prayer].job.AddMonk(m);
+                if(m.rank > 0){
+                    JobManager.i.jobs[Profession.prayer].job.AddMonk(m);
+                }else{
+                    JobManager.i.jobs[Profession.layclergy].job.AddMonk(m);
+                }
             }
         }    
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum ResourceType{
+    nothing = -1,
     names = 0, 
     pages = 1, 
     books = 2,
