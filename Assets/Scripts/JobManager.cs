@@ -6,6 +6,7 @@ public class JobManager
 {
     
     public Job prayers => jobs[Profession.prayer].job;
+    public Job layclergy => jobs[Profession.layclergy].job;
     public Dictionary<Profession, Jobsite> jobs;
 
     public static JobManager i;

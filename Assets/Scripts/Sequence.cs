@@ -13,6 +13,8 @@ public class Sequence : MonoBehaviour
     }
     public IEnumerator PlaySequence(){
 
+        yield return null; 
+        
         CoroutineExtensions.StartCoroutineEx(this, SequenceBody(), out routine);
 
         while(!skipped && routine.state == CoroutineState.Running){

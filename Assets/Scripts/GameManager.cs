@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
-        
         UIManager.i.year.SetText(year.ToString("F0") + " AD");
         StartCoroutine(GameLoop());
     }
@@ -92,6 +91,4 @@ public class GameManager : MonoBehaviour
 
         running = true;
     }
-    
-
 }

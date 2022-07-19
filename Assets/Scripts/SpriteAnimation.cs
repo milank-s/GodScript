@@ -19,7 +19,8 @@ public class SpriteAnimation : MonoBehaviour
             framerate = 0.0000001f;
         }
 
-        r.sprite = frames[0];
+        index = Random.Range(0, frames.Length);
+        r.sprite = frames[index];
     }
     void Update()
     {

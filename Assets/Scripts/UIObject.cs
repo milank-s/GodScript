@@ -18,6 +18,6 @@ public class UIObject : MonoBehaviour
    }
    
    public virtual IEnumerator Reveal(float time){
-       yield return new WaitForSeconds(time);
+    yield return null;
    }
 }

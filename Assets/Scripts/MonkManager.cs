@@ -20,7 +20,7 @@ public class MonkManager
     }
     
     public Monk CreateMonk(){
-        Monk m = new Monk();
+        Monk m = new Monk(Monk.Hierarchy.clergy);
         monks.Add(m);
 
         if(OnAddMonk != null){
@@ -63,9 +63,16 @@ public class Monk{
     public enum Hierarchy{laity, clergy}
     public Profession job;
     public Hierarchy rank;
-    public Monk(){
+    public Monk(Hierarchy h){
         lifeSpan = Random.Range(250, 350);
-        job = Profession.prayer;
+        rank = h;
+
+        if(h == Hierarchy.clergy){
+            job = Profession.prayer;
+        }else{
+            job = Profession.layclergy;
+        }
+
         name = GetMonkName();
     }
 

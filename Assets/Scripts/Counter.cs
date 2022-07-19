@@ -8,16 +8,16 @@ public class Counter : TextObject
     
     public override IEnumerator Reveal(float time = 1){
         
-        // yield return StartCoroutine(title.Reveal(1));
-        // yield return new WaitForSeconds(0.25f);
-        yield return StartCoroutine(base.Reveal(1));
+        yield return StartCoroutine(title.Reveal(1));
+        yield return new WaitForSeconds(0.25f);
+        yield return StartCoroutine(base.Reveal(0.2f));
     }
 
     public override void Start()
     {
-        base.Start();
-        
+        base.Start();  
     }
+
     public override void SetText(string t){
         float amount = float.Parse(t);
         text.text = amount.ToString("F0");

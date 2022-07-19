@@ -13,6 +13,7 @@ public class Job
     public float productivity = 1;
     public Profession jobType;
     public List<Monk> employees;
+
     public float output;
 
     public void Setup(){
@@ -54,14 +55,14 @@ public class Job
 
     public void Step(){
         if(resource.resourceType < 0) return;
-        
+
         CalculateOutput();
         resource.AddOutput(output);
     }
     
 }
 
-public class Jobsite : MonoBehaviour
+public class Jobsite : UIObject
 {
 
     public Profession jobType;
@@ -69,10 +70,27 @@ public class Jobsite : MonoBehaviour
     public Job job;
     public Counter employeeCounter;
 
+    public ImageObject upArrow;
+    public ImageObject downArrow;
+
+
     public void Awake(){
         job = new Job(jobType, resourceProduced);
         JobManager.i.jobs.Add(jobType, this);
         job.OnHireMonk += ChangeEmployeeCount;
+        employeeCounter.SetAmount(job.employees.Count);
+    }
+
+    public override IEnumerator Reveal(float time = 1){
+        
+        yield return StartCoroutine(base.Reveal(1));
+
+        yield return StartCoroutine(employeeCounter.Reveal(1));
+        
+        if(upArrow == null) yield break;
+
+        yield return StartCoroutine(upArrow.Reveal(1));
+        yield return StartCoroutine(downArrow.Reveal(1));
     }
 
     public void Update(){
@@ -82,9 +100,15 @@ public class Jobsite : MonoBehaviour
     public void TryAssignWorker(int i){
         
         if(i > 0){
+            if(JobManager.i.prayers.employees.Count > 0 || JobManager.i.layclergy.employees.Count > 0){
+                Monk m;
+                
+                if(JobManager.i.layclergy.employees.Count > 0){
+                    m = JobManager.i.layclergy.PopMonk();
+                }else{
+                    m = JobManager.i.prayers.PopMonk();
+                }
 
-            if(JobManager.i.prayers.employees.Count > 0){
-                Monk m = JobManager.i.prayers.PopMonk();
                 job.AddMonk(m);
                 UIManager.i.AddToFeed(m.name + " became a " + m.job);
             }
