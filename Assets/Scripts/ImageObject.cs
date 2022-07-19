@@ -14,6 +14,7 @@ public class ImageObject : UIObject
    
    public override IEnumerator Reveal(float time){
        yield return base.Reveal(time);
+       
        image.enabled = true;
    }
 }

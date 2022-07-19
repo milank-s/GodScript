@@ -4815,6 +4815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   roomType: 1
+  uiRoot: {fileID: 406245655}
   visualRoot: {fileID: 2138273753}
 --- !u!1 &1634917271
 GameObject:

@@ -18,6 +18,15 @@ public class StartSequence : Sequence
 
         yield return Wait(Pause(0.5f));
 
+        yield return Wait(UIManager.i.booksTotal.Reveal(1));
+
+        yield return Wait(Pause(0.25f));
+
+        yield return Wait(UIManager.i.currentPage.Reveal(1));
+        
+        yield return Wait(Pause(0.25f));
+
+        yield return Wait(title.Reveal(1));
 
         //these should be written to the script. 
         
@@ -28,17 +37,6 @@ public class StartSequence : Sequence
         while(UIManager.i.feed.typing && !skipped){
             yield return null;
         }
-
-
-        yield return Wait(UIManager.i.booksTotal.Reveal(1));
-
-        yield return Wait(Pause(0.25f));
-
-        yield return Wait(UIManager.i.currentPage.Reveal(1));
-        
-        yield return Wait(Pause(0.25f));
-
-        yield return Wait(title.Reveal(1));
 
         Main.manager.running = true;
     }

@@ -9,6 +9,8 @@ public class Room : MonoBehaviour
 {
     public bool unlocked;
     public Rooms roomType;
+
+    public Transform uiRoot;
     public Transform visualRoot;
 
     public virtual void Start(){
@@ -36,6 +38,10 @@ public class Room : MonoBehaviour
 
     public virtual IEnumerator Reveal(){
         foreach(UIObject o in visualRoot.GetComponentsInChildren<UIObject>()){
+            yield return StartCoroutine(o.Reveal(1));
+        }
+
+        foreach(UIObject o in uiRoot.GetComponentsInChildren<UIObject>()){
             yield return StartCoroutine(o.Reveal(1));
         }
     }

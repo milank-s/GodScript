@@ -8,8 +8,8 @@ public class Counter : TextObject
     
     public override IEnumerator Reveal(float time = 1){
         
-        yield return StartCoroutine(title.Reveal(1));
-        yield return new WaitForSeconds(0.25f);
+        // yield return StartCoroutine(title.Reveal(1));
+        // yield return new WaitForSeconds(0.25f);
         yield return StartCoroutine(base.Reveal(1));
     }
 
