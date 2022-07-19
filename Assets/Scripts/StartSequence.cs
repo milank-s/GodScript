@@ -7,6 +7,9 @@ public class StartSequence : Sequence
     public SpriteObject background;
     public SpriteObject star;
     public TextObject title;
+    public ResourceCounter names;
+    public GameObject prayerButton;
+
     public override IEnumerator SequenceBody(){
 
         yield return Wait(UIManager.i.year.Reveal(1));
@@ -28,16 +31,27 @@ public class StartSequence : Sequence
 
         yield return Wait(title.Reveal(1));
 
+
         //these should be written to the script. 
         
-        UIManager.i.AddToFeed("Writing in the study late one night");
-        UIManager.i.AddToFeed("a monk looked out to see a new star");
-        UIManager.i.AddToFeed("and began to compose new praise of God");
+        UIManager.i.AddToFeed("Sitting in the study late one night a monk looked out to see a new star and began to pray");
+ 
+        
+        yield return Wait(Pause(2.5f));
 
-        while(UIManager.i.feed.typing && !skipped){
-            yield return null;
-        }
+        prayerButton.SetActive(true);
 
         Main.manager.running = true;
+
+        while(Resources.GetResource(ResourceType.names).amount < 1 && !skipped){
+            Debug.Log(Resources.GetResource(ResourceType.names).amount);
+            yield return null; 
+        }
+
+        yield return StartCoroutine(names.Reveal(1));
+         
+        while(Resources.GetResource(ResourceType.names).amount < 10 && !skipped){
+            yield return null;
+        }
     }
 }

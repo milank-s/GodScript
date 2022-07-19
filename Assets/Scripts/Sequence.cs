@@ -17,7 +17,7 @@ public class Sequence : MonoBehaviour
 
         while(!skipped && routine.state == CoroutineState.Running){
             
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetKeyDown(KeyCode.Return)){
                 skipped = true;
             }
 

@@ -29,6 +29,10 @@ public class UIManager : MonoBehaviour
         feed.AddText(t);
     }
 
+    public void InsertToFeed(string t){
+        
+    }
+
     public void Awake(){
         i = this;
     }
