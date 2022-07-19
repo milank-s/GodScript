@@ -13,6 +13,10 @@ public class UIObject : MonoBehaviour
        
    }
    
+   public virtual void FadeIn(){
+        StartCoroutine(Reveal(1));
+   }
+   
    public virtual IEnumerator Reveal(float time){
        yield return new WaitForSeconds(time);
    }

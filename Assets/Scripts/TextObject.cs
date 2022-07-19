@@ -13,7 +13,12 @@ public class TextObject : UIObject
         textCached = text.text;
         base.Start();
         
-        if(!visible){
+    }
+
+    public override void Show(bool b)
+    {
+        base.Show(b);
+        if(!b){
             text.text = "";
         }
     }

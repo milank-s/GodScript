@@ -26,4 +26,6 @@ public class Effects : MonoBehaviour
 
         s.color = Color.white;
     }
+
+    
 }

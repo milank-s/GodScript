@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         }else{
             PlayerPrefs.SetInt(u.roomType.ToString(), 1);
         }
-
+        
         rooms.Add(u.roomType, u);
     }
 

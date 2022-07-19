@@ -11,20 +11,32 @@ public class Room : MonoBehaviour
     public Rooms roomType;
     public Transform visualRoot;
 
-    public virtual void Awake(){
+    public virtual void Start(){
         Main.manager.SetupUnlock(this);
     }
 
     public void Lock(bool b){
-        Show(b);
+        Show(!b);
     }
 
     public void Unlock(){
         Show(true);
+        Debug.Log(roomType + " unlocked");
         PlayerPrefs.SetInt(roomType.ToString(), 0);
     }
 
     public void Show(bool b){
+        
         visualRoot.gameObject.SetActive(b);
+
+        if(b){
+            StartCoroutine(Reveal());
+        }
+    }
+
+    public virtual IEnumerator Reveal(){
+        foreach(UIObject o in visualRoot.GetComponentsInChildren<UIObject>()){
+            yield return StartCoroutine(o.Reveal(1));
+        }
     }
 }
