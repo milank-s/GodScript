@@ -34,17 +34,21 @@ public class GameManager : MonoBehaviour
     public void Initialize(){
         
         if(!PlayerPrefs.HasKey("startedGame")){
+            Debug.Log("Starting clean game");
             PlayerPrefs.SetInt("startedGame", 1);
             Resources.pages.amount = 3;
         }
 
 
         if(PlayerPrefs.HasKey("stage")){
+            
             stage = (Stage)PlayerPrefs.GetInt("stage");
         }else{
             stage = Stage.intro;
             PlayerPrefs.SetInt("stage", (int)Stage.intro);
         }
+
+            Debug.Log("beginning from " + stage);
 
         if(PlayerPrefs.HasKey("year")){
             year = PlayerPrefs.GetInt("year");
@@ -85,6 +89,11 @@ public class GameManager : MonoBehaviour
         }
         
         rooms.Add(u.roomType, u);
+    }
+
+    void OnApplicationQuit(){
+        PlayerPrefs.Save();
+        Debug.Log("saving game");
     }
 
     public IEnumerator GameLoop(){
