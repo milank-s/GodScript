@@ -41,17 +41,20 @@ public class StartSequence : Sequence
 
         prayerButton.SetActive(true);
 
-        Main.manager.running = true;
-
         while(Resources.GetResource(ResourceType.names).amount < 1 && !skipped){
-            Debug.Log(Resources.GetResource(ResourceType.names).amount);
             yield return null; 
         }
+    
 
         yield return StartCoroutine(names.Reveal(1));
+        
+        UIManager.i.AddToFeed("As he prayed he began to see God's manifold names");
+
          
         while(Resources.GetResource(ResourceType.names).amount < 10 && !skipped){
             yield return null;
         }
+
+        
     }
 }

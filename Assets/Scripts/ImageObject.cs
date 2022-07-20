@@ -7,8 +7,8 @@ public class ImageObject : UIObject
 {
     public Image image;
 
-   public override void Start(){
-       base.Start();
+   public override void Awake(){
+       base.Awake();
        image.enabled = false;
    }
    

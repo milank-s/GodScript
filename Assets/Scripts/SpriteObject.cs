@@ -6,7 +6,7 @@ public class SpriteObject : UIObject
 {
    
    SpriteRenderer r;
-   public override void Start(){
+   public override void Awake(){
        r = GetComponent<SpriteRenderer>();
 
        if(!visible){

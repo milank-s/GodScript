@@ -6,10 +6,12 @@ public class ResourceCounter : Counter
 {
     public ResourceType resourceType;
     Resource r;
-    public void Awake(){
+    public override void Awake(){
         //title.SetText(resourceType.ToString());
         r = Resources.GetResource(resourceType);
         r.OnWholeNumberChanged += SetAmount;
+
+        base.Awake();
     }
 
     public void SetResourceAmount(){

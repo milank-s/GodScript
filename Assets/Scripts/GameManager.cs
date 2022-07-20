@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
 
     public void Initialize(){
         
+        if(!PlayerPrefs.HasKey("startedGame")){
+            PlayerPrefs.SetInt("startedGame", 1);
+            Resources.pages.amount = 3;
+        }
+
+
         if(PlayerPrefs.HasKey("stage")){
             stage = (Stage)PlayerPrefs.GetInt("stage");
         }else{

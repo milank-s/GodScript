@@ -23,14 +23,12 @@ public class Room : MonoBehaviour
 
     public void Unlock(){
         Show(true);
-        Debug.Log(roomType + " unlocked");
+        
         PlayerPrefs.SetInt(roomType.ToString(), 0);
     }
 
     public void Show(bool b){
         
-        visualRoot.gameObject.SetActive(b);
-
         if(b){
             StartCoroutine(Reveal());
         }

@@ -13,9 +13,9 @@ public class Counter : TextObject
         yield return StartCoroutine(base.Reveal(0.2f));
     }
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();  
+        base.Awake();  
     }
 
 }

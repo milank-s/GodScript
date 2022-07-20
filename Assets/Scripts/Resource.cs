@@ -14,11 +14,12 @@ public class Resource
 
     public Resource(ResourceType r){
         resourceType = r;
-        if(PlayerPrefs.HasKey(r.ToString())){
-            amount = PlayerPrefs.GetFloat(r.ToString());
-            Debug.Log(amount);
+        string s = System.Enum.GetName(typeof(ResourceType), r);
+        
+        if(PlayerPrefs.HasKey(s)){
+            amount = PlayerPrefs.GetFloat(s);
         }else{            
-            PlayerPrefs.SetFloat(r.ToString(), amount);
+            PlayerPrefs.SetFloat(s, amount);
         }
     }
 

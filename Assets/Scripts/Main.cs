@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
         jobs = new JobManager();
         resources = new Resources();
         monks = new MonkManager();
+        manager.running = true;
     }
     void Update()
     {

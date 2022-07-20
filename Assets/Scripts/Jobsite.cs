@@ -74,10 +74,13 @@ public class Jobsite : UIObject
     public ImageObject downArrow;
 
 
-    public void Awake(){
+    public override void Awake(){
         job = new Job(jobType, resourceProduced);
         JobManager.i.jobs.Add(jobType, this);
         job.OnHireMonk += ChangeEmployeeCount;
+        
+        base.Awake();
+
     }
 
     public override IEnumerator Reveal(float time = 1){
@@ -109,7 +112,7 @@ public class Jobsite : UIObject
                 }
 
                 job.AddMonk(m);
-                UIManager.i.AddToFeed(m.name + " became a " + m.job);
+                //UIManager.i.AddToFeed(m.name + " became a " + m.job);
             }
         }else{
             if(job.employees.Count > 0){

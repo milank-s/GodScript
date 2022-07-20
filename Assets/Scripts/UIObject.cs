@@ -6,7 +6,7 @@ public class UIObject : MonoBehaviour
 {
     public bool visible;
 
-   public virtual void Start(){
+   public virtual void Awake(){
        Show(visible);
    }
    public virtual void Show(bool b){

@@ -8,10 +8,10 @@ public class TextObject : UIObject
     
     public TextMeshProUGUI text;
     protected string textCached;
-    public override void Start()
+    public override void Awake()
     {
         textCached = text.text;
-        base.Start();
+        base.Awake();
         
     }
 

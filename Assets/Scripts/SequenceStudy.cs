@@ -10,9 +10,10 @@ public class SequenceStudy : Sequence
     public override IEnumerator SequenceBody(){
 
         yield return new WaitForSeconds(1);
-        Main.manager.UnlockRoom(Rooms.STUDIES);
 
-        Debug.Log("study sequence");
+        Main.manager.UnlockRoom(Rooms.STUDIES);
+    
+        UIManager.i.AddToFeed("The monk dipped his pen in the inkwell and began to transcribe them");
         
         prayerButton.SetActive(true);
 
