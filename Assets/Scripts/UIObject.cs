@@ -7,17 +7,26 @@ public class UIObject : MonoBehaviour
     public bool visible;
 
    public virtual void Awake(){
-       Show(visible);
+       StartCoroutine(Show(1, visible));
    }
-   public virtual void Show(bool b){
-       visible = b;
+
+   public void Enable(){
+        StartCoroutine(Show(1, true));
    }
-   
-   public virtual void FadeIn(){
-        StartCoroutine(Reveal(1));
+   public virtual IEnumerator Show(float time = 1, bool b = true){
+
+        bool isVisible = visible;
+        visible = b;
+
+        if(b && !isVisible){
+            yield return StartCoroutine(Reveal(time));
+        }else{
+            yield break;
+        }
    }
+
    
    public virtual IEnumerator Reveal(float time){
-    yield return null;
+        yield return null;
    }
 }

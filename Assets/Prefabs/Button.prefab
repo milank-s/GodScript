@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3852273869662384175}
   - component: {fileID: 3852273869662384174}
   - component: {fileID: 3852273869662384169}
+  - component: {fileID: 6620158595102330056}
+  - component: {fileID: 4230213203284131677}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -119,6 +121,36 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6620158595102330056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852273869662384171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8fc246a142536946b09d8c213234ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  children:
+  - {fileID: 8124635374377032809}
+  - {fileID: 4230213203284131677}
+--- !u!114 &4230213203284131677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852273869662384171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c68e651d12337f4aa0e801e226acc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  image: {fileID: 3852273869662384174}
 --- !u!1 &3852273870390792301
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3852273870390792290}
   - component: {fileID: 3852273870390792288}
+  - component: {fileID: 8124635374377032809}
   - component: {fileID: 3852273870390792291}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -164,6 +197,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3852273870390792301}
   m_CullTransparentMesh: 0
+--- !u!114 &8124635374377032809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852273870390792301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff28b6d5531a4b4a8f78628a724f03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  text: {fileID: 3852273870390792291}
 --- !u!114 &3852273870390792291
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     
     public Stage stage;
     
-    Dictionary<Rooms, Room> rooms;
+    Dictionary<Unlocks, Unlock> unlocks;
 
     [Header("Sequences")]
     public Sequence[] sequences;
 
     public void Awake(){
         i = this;
-        rooms = new Dictionary<Rooms, Room>();
+        unlocks = new Dictionary<Unlocks, Unlock>();
         
         Initialize();
     }
@@ -74,21 +74,21 @@ public class GameManager : MonoBehaviour
         Main.monks.MonkArrival();
     }
 
-    public void UnlockRoom(Rooms roomType){
-        Room r = null;
-        if(rooms.TryGetValue(roomType, out r)){
-            r.Unlock();
+    public void Unlock(Unlocks unlockType){
+        Unlock r = null;
+        if(unlocks.TryGetValue(unlockType, out r)){
+            r.Enable();
         }
     }
-    public void SetupUnlock(Room u){
+    public void SetupUnlock(Unlock u){
 
-        if(PlayerPrefs.HasKey(u.roomType.ToString())){
-            u.Lock(PlayerPrefs.GetInt(u.roomType.ToString()) == 0);
+        if(PlayerPrefs.HasKey(u.unlockType.ToString())){
+            u.Lock(PlayerPrefs.GetInt(u.unlockType.ToString()) == 0);
         }else{
-            PlayerPrefs.SetInt(u.roomType.ToString(), 1);
+            PlayerPrefs.SetInt(u.unlockType.ToString(), 1);
         }
         
-        rooms.Add(u.roomType, u);
+        unlocks.Add(u.unlockType, u);
     }
 
     void OnApplicationQuit(){

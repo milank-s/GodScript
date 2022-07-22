@@ -15,13 +15,15 @@ public class TextObject : UIObject
         
     }
 
-    public override void Show(bool b)
+    public override IEnumerator Show(float time = 1, bool b = true)
     {
-        base.Show(b);
-
+        
         if(!b){
             text.text = "";
         }
+
+        yield return base.Show(time, b);
+
     }
     public virtual void SetText(string t){
         if(visible){
@@ -42,6 +44,5 @@ public class TextObject : UIObject
     public override IEnumerator Reveal(float time = 1)
     {   
         yield return StartCoroutine(Effects.Type(time, text, textCached));
-        Show(true);
     }
 }

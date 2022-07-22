@@ -5,17 +5,14 @@ using UnityEngine;
 public class SequenceStudy : Sequence
 {
 
-    public GameObject prayerButton;
-
     public override IEnumerator SequenceBody(){
 
         yield return new WaitForSeconds(1);
 
-        Main.manager.UnlockRoom(Rooms.STUDIES);
+        Main.manager.Unlock(Unlocks.STUDIES);
     
         UIManager.i.AddToFeed("The monk dipped his pen in the inkwell and began to transcribe them");
         
-        prayerButton.SetActive(true);
 
         if(Main.monks.monks.Count == 0){
            Monk m = Main.monks.CreateMonk();

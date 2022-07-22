@@ -9,7 +9,9 @@ public class ImageObject : UIObject
 
    public override void Awake(){
        base.Awake();
-       image.enabled = false;
+       if(!visible){
+        image.enabled = false;
+       }
    }
    
    public override IEnumerator Reveal(float time){

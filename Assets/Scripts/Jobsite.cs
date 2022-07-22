@@ -70,10 +70,6 @@ public class Jobsite : UIObject
     public Job job;
     public Counter employeeCounter;
 
-    public ImageObject upArrow;
-    public ImageObject downArrow;
-
-
     public override void Awake(){
         job = new Job(jobType, resourceProduced);
         JobManager.i.jobs.Add(jobType, this);
@@ -87,12 +83,8 @@ public class Jobsite : UIObject
         
         yield return StartCoroutine(base.Reveal(1));
 
-        yield return StartCoroutine(employeeCounter.Reveal(1));
-        
-        if(upArrow == null) yield break;
+        yield return StartCoroutine(employeeCounter.Show());
 
-        yield return StartCoroutine(upArrow.Reveal(1));
-        yield return StartCoroutine(downArrow.Reveal(1));
     }
 
     public void Update(){
