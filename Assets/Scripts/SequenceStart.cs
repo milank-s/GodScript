@@ -37,21 +37,23 @@ public class SequenceStart : Sequence
 
 
 
-        ScriptWriter.i.WriteInsert("Sitting in the study late one night a monk looked out to see a new star and began to pray");
- 
+        ScriptWriter.i.WriteInsert("Sitting in the study one night a monk looked out to see a new star");
         
-        yield return Wait(Pause(2.5f));
+        yield return Wait(Pause(1f));
+        
+        ScriptWriter.i.WriteInsert("He saw in its aspect a name of god and began to pray");
+        
+        yield return Wait(Pause(1f));
 
         prayerButton.Enable();
 
         while(Resources.GetResource(ResourceType.names).amount < 1 && !skipped){
             yield return null; 
         }
-    
 
         yield return StartCoroutine(names.Show(1));
         
-        ScriptWriter.i.WriteInsert("As he prayed he began to see God's manifold names");
+        ScriptWriter.i.WriteInsert("And as he prayed God began to reveal itself");
 
          
         while(Resources.GetResource(ResourceType.names).amount < 5 && !skipped){

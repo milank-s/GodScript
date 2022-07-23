@@ -10,7 +10,7 @@ public class Job
     public delegate void Event();
     public Event OnHireMonk;
     public Resource resource;
-    public float productivity = 1;
+    public float productivity = 10;
     public Profession jobType;
     public List<Monk> employees;
 

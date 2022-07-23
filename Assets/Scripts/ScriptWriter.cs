@@ -13,6 +13,17 @@ public class Script {
         text = text.Replace("\r", " ").Replace("\n", " ");
         words = text.Split (new char[] { ' ',  });
     }
+
+    public string GetNextWord(){
+        if(wordIndex < words.Length){
+            string w = curWord;
+            wordIndex ++;
+            return w;
+        }else{
+            return "";
+        }
+
+    }
 }
 
 public class ScriptWriter : MonoBehaviour
@@ -68,6 +79,9 @@ public class ScriptWriter : MonoBehaviour
         }
         
         //add a two line breaks; only if the first one doesnt create a new page
+        
+        yield return new WaitForSeconds(1);
+
         textQueue.Dequeue();
 
         if(textQueue.Count > 0){
