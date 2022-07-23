@@ -78,7 +78,7 @@ public class ScriptWriter : MonoBehaviour
 
     void LineBreak(){
         if(!Return(false)){
-            Return();
+           Return(false);
         }
     }
 
@@ -158,12 +158,14 @@ public class ScriptWriter : MonoBehaviour
 
         lineIndex++;
 
-        if(lineIndex >= lines.Count && nextPage){
+        if(lineIndex >= lines.Count){
             //finished page
             //clear all lines
-            ScriptManager.i.FinishPage();
-            ClearPage();
-            lineIndex = 0;
+            if(nextPage){
+                ScriptManager.i.FinishPage();
+                ClearPage();
+                lineIndex = 0;
+            }
             return true;
         }
 
