@@ -36,7 +36,8 @@ public class SequenceStart : Sequence
         yield return Wait(title.Show(1));
 
 
-        UIManager.i.AddToFeed("Sitting in the study late one night a monk looked out to see a new star and began to pray");
+
+        ScriptWriter.i.WriteInsert("Sitting in the study late one night a monk looked out to see a new star and began to pray");
  
         
         yield return Wait(Pause(2.5f));

@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public class Script {
+
+    public string[] words;
+    public int letterIndex = 0;
+    public int wordIndex = 0;
+
+    public string curWord => words[wordIndex % words.Length];
+
+    public Script(string text){
+        words = text.Split (new char[] { ' ' });
+    }
+}
+
 public class ScriptWriter : MonoBehaviour
 {
     public static ScriptWriter i;
     public TextAsset sourceText;
-    string[] words;
-    int wordIndex;
-    int letterIndex;
+
+    Script script;
     int lineIndex;
 
+    public float autowriteSpeed = 0.1f;
+    bool writingInsert;
     Queue<string> wordQueue;
     //string curWord => wordQueue.Peek();
 
-    string curWord => words[wordIndex % words.Length];
     TextMeshProUGUI curLine => lines[lineIndex];
 
     // [SerializeField] TextMeshProUGUI text;
@@ -25,68 +38,114 @@ public class ScriptWriter : MonoBehaviour
 
     public void Awake(){
         i = this;    
-        words = sourceText.text.Split (new char[] { ' ' });
+        script = new Script(sourceText.text);
         wordQueue = new Queue<string>();
     }
 
-    public void WriteLetter(){
+    public void WriteInsert(string t){
+        StartCoroutine(WriteText(t));
+    }
+    public IEnumerator WriteText(string t){
+        
+        Script s = new Script(t);
+        writingInsert = true;
 
-        if(wordIndex >= words.Length){
-            return;
+        if(lineIndex != 0){
+            LineBreak();
+        }
+
+        while(ScriptWriter.i.WriteLetter(ref s, false)){
+           yield return new WaitForSeconds(autowriteSpeed);
         }
         
-        Resources.Decrement(ResourceType.writers);
+        //add a two line breaks; only if the first one doesnt create a new page
 
-        char letter = curWord[letterIndex];
+        LineBreak();
         
-        if(lineIndex == 0 && curLine.text == "" && letterIndex == 0){
+        writingInsert = false;
+    }
+
+    void LineBreak(){
+        if(!Return()){
+            Return();
+        }
+    }
+
+    public void WriteScriptLetter(){
+
+        if(writingInsert) return;
+
+        Resources.Decrement(ResourceType.writers);
+        WriteLetter(ref script);
+
+    }
+
+    public bool WriteLetter(ref Script s, bool consumeResources = true){
+        
+        if(s.wordIndex >= s.words.Length){
+            return false;
+        }
+        
+        string word = s.curWord;
+        char letter = word[s.letterIndex];
+
+
+        if(lineIndex == 0 && curLine.text == "" && s.letterIndex == 0){
             dropCap.text = letter.ToString();
         }else{
             curLine.text += letter;
         }
 
-        letterIndex ++;
+        s.letterIndex ++;
 
-        if(letterIndex >= curWord.Length){
+        if(s.letterIndex >= word.Length){
 
-            ScriptManager.i.FinishWord();
-            
-            //wordQueue.Dequeue();
-            
-            //finished word
-            wordIndex ++;
+            s.wordIndex ++;
 
-            //trying to get rid of spaces?
-            while(curWord.Length <= 1 && curWord == " "){
-                wordIndex ++;
+            if(consumeResources){    
+                ScriptManager.i.FinishWord();
             }
 
-            letterIndex = 0;
+            //trying to get rid of spaces?
+            while(s.curWord.Length <= 1 && s.curWord == " "){
+                s.wordIndex ++;
+            }
+
+            s.letterIndex = 0;
             curLine.text += " ";
 
             //check if next word fits on the line
             
-            curLine.text += curWord + " ";
+            curLine.text += s.curWord + " ";
             curLine.ForceMeshUpdate();
 
             bool isOverflow = curLine.isTextOverflowing;
 
              //now remove that shit
-            curLine.text = curLine.text.Remove(curLine.text.Length - (curWord.Length + 1));
+            curLine.text = curLine.text.Remove(curLine.text.Length - (s.curWord.Length + 1));
 
             if(isOverflow){
                 //delete the last word and start it on the next line
-                lineIndex++;
-
-                if(lineIndex >= lines.Count){
-                    //finished page
-                    //clear all lines
-                    ScriptManager.i.FinishPage();
-                    ClearPage();
-                    lineIndex = 0;
-                }
+                Return();
             }
         }
+        
+        return true;
+    }
+
+    public bool Return(){
+        lineIndex++;
+
+        if(lineIndex >= lines.Count){
+            //finished page
+            //clear all lines
+            ScriptManager.i.FinishPage();
+            ClearPage();
+            lineIndex = 0;
+            return true;
+        }
+
+        return false;
     }
 
     public void ClearPage(){

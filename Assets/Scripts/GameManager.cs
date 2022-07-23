@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
             Resources.pages.amount = 3;
         }
 
+        
+            Resources.pages.amount = 3;
+
 
         if(PlayerPrefs.HasKey("stage")){
             

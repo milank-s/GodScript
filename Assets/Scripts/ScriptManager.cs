@@ -11,8 +11,6 @@ public class ScriptManager : MonoBehaviour
     public UnityEvent OnPageCompleted;
     public UnityEvent OnBookCompleted;
     float lettersLastFrame;
-    
-    Queue<string> wordQueue;
 
     Job prayers => JobManager.i.jobs[Profession.prayer].job;
     Job writers => JobManager.i.jobs[Profession.writer].job;
@@ -30,6 +28,9 @@ public class ScriptManager : MonoBehaviour
     [Header("ints")]
 
     int pagesCompleted;
+
+    
+    Queue<string> wordQueue;
     
 
     public void Awake(){
@@ -74,11 +75,10 @@ public class ScriptManager : MonoBehaviour
                 if(Resources.pages.amount >= 1){
                     //continue writing while we still have pages
                     
-                    ScriptWriter.i.WriteLetter();
+                    ScriptWriter.i.WriteScriptLetter();
                 }
             }
         }
-
     }
 
     public void BindBooks(){
@@ -95,6 +95,7 @@ public class ScriptManager : MonoBehaviour
     public void Step(){
  
         BindBooks();
+        
 
         //calculate word delta
         // int writerOutput = (int)Mathf.Floor(Mathf.Clamp(letters + writers.output - lettersLastFrame, 0, Resources.names.amount));
