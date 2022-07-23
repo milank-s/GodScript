@@ -10,7 +10,8 @@ public class Script {
     public int wordIndex = 0;
     public string curWord => words[wordIndex % words.Length];
     public Script(string text){
-        words = text.Split (new char[] { ' ' });
+        text = text.Replace("\r", " ").Replace("\n", " ");
+        words = text.Split (new char[] { ' ',  });
     }
 }
 

@@ -58,6 +58,7 @@ public class MonkManager
 public class Monk{
     public string name;
     public float lifeSpan;
+    float lifeLeft;
     public static string[] names = {"Joseph", "Thomas", "Quine", "Nathanial", "Isaac", "Frank", "Isaiah", "Samuel"};
 
     public enum Hierarchy{laity, clergy}
@@ -65,6 +66,7 @@ public class Monk{
     public Hierarchy rank;
     public Monk(Hierarchy h){
         lifeSpan = Random.Range(250, 350);
+        lifeLeft = lifeSpan;
         rank = h;
 
         if(h == Hierarchy.clergy){
@@ -81,6 +83,6 @@ public class Monk{
     }
 
     public void Tick(){
-        lifeSpan -= Time.deltaTime;
+        lifeLeft -= Time.deltaTime;
     }
 }
