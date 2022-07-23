@@ -51,7 +51,7 @@ public class SequenceStart : Sequence
 
         yield return StartCoroutine(names.Show(1));
         
-        UIManager.i.AddToFeed("As he prayed he began to see God's manifold names");
+        ScriptWriter.i.WriteInsert("As he prayed he began to see God's manifold names");
 
          
         while(Resources.GetResource(ResourceType.names).amount < 5 && !skipped){

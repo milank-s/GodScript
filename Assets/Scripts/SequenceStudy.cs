@@ -11,7 +11,7 @@ public class SequenceStudy : Sequence
 
         Main.manager.Unlock(Unlocks.STUDIES);
     
-        UIManager.i.AddToFeed("The monk dipped his pen in the inkwell and began to transcribe them");
+        ScriptWriter.i.WriteInsert("The monk dipped his pen in the inkwell and began to transcribe them");
         
 
         if(Main.monks.monks.Count == 0){

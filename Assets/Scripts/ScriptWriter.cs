@@ -8,9 +8,7 @@ public class Script {
     public string[] words;
     public int letterIndex = 0;
     public int wordIndex = 0;
-
     public string curWord => words[wordIndex % words.Length];
-
     public Script(string text){
         words = text.Split (new char[] { ' ' });
     }
@@ -26,7 +24,10 @@ public class ScriptWriter : MonoBehaviour
 
     public float autowriteSpeed = 0.1f;
     bool writingInsert;
-    Queue<string> wordQueue;
+
+    bool writingScript;
+
+    Queue<Script> textQueue;
     //string curWord => wordQueue.Peek();
 
     TextMeshProUGUI curLine => lines[lineIndex];
@@ -39,16 +40,23 @@ public class ScriptWriter : MonoBehaviour
     public void Awake(){
         i = this;    
         script = new Script(sourceText.text);
-        wordQueue = new Queue<string>();
+        textQueue = new Queue<Script>();
     }
 
     public void WriteInsert(string t){
-        StartCoroutine(WriteText(t));
-    }
-    public IEnumerator WriteText(string t){
-        
         Script s = new Script(t);
+        
+        if(textQueue.Count == 0){
+            StartCoroutine(WriteText(s));
+        }
+        
+        textQueue.Enqueue(s);
+
+    }
+    public IEnumerator WriteText(Script s){
+        
         writingInsert = true;
+        writingScript = false;
 
         if(lineIndex != 0){
             LineBreak();
@@ -59,14 +67,17 @@ public class ScriptWriter : MonoBehaviour
         }
         
         //add a two line breaks; only if the first one doesnt create a new page
+        textQueue.Dequeue();
 
-        LineBreak();
-        
-        writingInsert = false;
+        if(textQueue.Count > 0){
+            StartCoroutine(WriteText(textQueue.Peek()));
+        }else{     
+            writingInsert = false;
+        }
     }
 
     void LineBreak(){
-        if(!Return()){
+        if(!Return(false)){
             Return();
         }
     }
@@ -74,6 +85,11 @@ public class ScriptWriter : MonoBehaviour
     public void WriteScriptLetter(){
 
         if(writingInsert) return;
+        
+        if(!writingScript){
+            writingScript = true;
+            LineBreak();
+        }
 
         Resources.Decrement(ResourceType.writers);
         WriteLetter(ref script);
@@ -81,7 +97,12 @@ public class ScriptWriter : MonoBehaviour
     }
 
     public bool WriteLetter(ref Script s, bool consumeResources = true){
-        
+
+        //only going to next page 
+        if(lineIndex >= lines.Count){
+            Return();
+        }
+
         if(s.wordIndex >= s.words.Length){
             return false;
         }
@@ -126,17 +147,18 @@ public class ScriptWriter : MonoBehaviour
 
             if(isOverflow){
                 //delete the last word and start it on the next line
-                Return();
+                Return(false);
             }
         }
         
         return true;
     }
 
-    public bool Return(){
+    public bool Return(bool nextPage = true){
+
         lineIndex++;
 
-        if(lineIndex >= lines.Count){
+        if(lineIndex >= lines.Count && nextPage){
             //finished page
             //clear all lines
             ScriptManager.i.FinishPage();
